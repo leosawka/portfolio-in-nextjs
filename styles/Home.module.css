@@ -1,0 +1,75 @@
+.aboutSection {
+  display: flex;
+  padding: 2rem;
+  align-items: center;
+  gap: 2rem;
+  max-width: 80vw;
+  margin: auto;
+}
+
+.aboutSection img {
+  height: 500px;
+  width: 500px;
+  padding: 0 5vw;
+  border-radius: 50%;
+}
+
+.aboutSection p {
+  width: 40vw;
+}
+
+.aboutSection h1 {
+  width: 40vw;
+}
+
+.aboutTitle {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.aboutText {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Responsive: mobile-first */
+@media (min-width: 768px) {
+  .aboutSection {
+    padding: 4rem;
+  }
+
+  .aboutTitle {
+    font-size: 2.5rem;
+  }
+}
+
+.skillsSection {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+}
+
+.skillsTitle {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.badge {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+.badge:hover {
+  transform: scale(1.05);
+}

@@ -1,0 +1,38 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.right button {
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: 1px solid var(--text-color);
+  border-radius: 5px;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.right button:hover {
+  opacity: 0.8;
+}
+
+.left h1 {
+  margin: 0;
+}
+
+#toolbar {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+#darkmode {
+  border: none;
+}
