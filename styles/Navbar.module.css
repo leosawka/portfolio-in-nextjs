@@ -2,10 +2,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  padding: .2rem 2rem;
+}
+
+.navbarLight {
+  background-color: #f5f5f5;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  color: #000;
+}
+
+.navbarDark {
+  background-color: #404040;
+  border-bottom: 1px solid rgba(222, 222, 222, 0.3);
+  color: #fff;
 }
 
 .right button {
@@ -22,8 +31,18 @@
   opacity: 0.8;
 }
 
+.left {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
 .left h1 {
   margin: 0;
+}
+
+.left h2 {
+  font-size: x-large;
 }
 
 #toolbar {

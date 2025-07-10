@@ -1,13 +1,40 @@
-/* Contact.module.css */
-.contactForm {
+.contact {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  background-color: #404040;
+  padding-bottom: 2rem;
+  align-items: center;
+  width: 93.5vw;
+  border-radius: 10px;
+  margin: 2vh auto 2vh auto;
+}
+
+.contactLight {
+  background-color: #404040;
+  color: #fff;
+}
+
+.contactDark {
+  background-color: #f5f5f5;
+  color: #000;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  background-color: #404040;
+  padding: 2rem;
+  align-items: center;
+  gap: 2rem;
+  width: 90%;
+  border-radius: 10px;
+  margin: 2vw auto 0 auto;
 }
 
 .input,
 .textarea,
 .button {
+  width: 95%;
   padding: 0.75rem;
   border: 1px solid #ccc;
   border-radius: 5px;

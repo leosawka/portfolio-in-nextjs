@@ -1,8 +1,44 @@
 .socialSection {
-  padding: 2rem;
-  max-width: 800px;
-  margin: auto;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  background-color: #404040;
+  padding: 2rem 0;
+  align-items: center;
+  width: 93.5vw;
+  border-radius: 10px;
+  margin: 2vh auto 2vh auto;
+}
+
+.socialSectionLight {
+  background-color: #404040;
+  color: #fff;
+}
+
+.socialSectionDark {
+  background-color: #f5f5f5;
+  color: #000;
+}
+
+.iconWrapper {
+  display: inline-block;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.iconWrapper img {
+  width: 32px;
+  height: 32px;
+}
+
+.light {
+  fill: #fff;
+  box-shadow: 8px 8px 16px #bebebe00;
+}
+
+.dark {
+  fill:#000;
+  box-shadow: 8px 8px 16px #14141400;
 }
 
 .socialTitle {
@@ -12,7 +48,7 @@
 
 .socialLinks {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 1rem;
 }
 
@@ -22,7 +58,7 @@
   align-items: center;
   gap: 0.75rem;
   font-size: 1.2rem;
-  color: var(--text-color);
+  color: #000;
   text-decoration: none;
   font-weight: bold;
   transition: transform 0.2s;
