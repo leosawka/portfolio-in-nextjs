@@ -1,4 +1,4 @@
-import HCaptcha from 'react-hcaptcha';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { useState, useRef } from 'react';
 
 const ContactForm = () => {
