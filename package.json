@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hcaptcha/react-hcaptcha": "^1.12.0",
+    "lru-cache": "^11.1.0",
     "next": "15.3.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "resend": "^4.6.0"
+    "react-hcaptcha": "^0.1.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

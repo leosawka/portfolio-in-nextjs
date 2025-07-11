@@ -10,6 +10,7 @@ import { GithubIcon } from '../components/icons/GithubIcon';
 import { GmailIcon } from '../components/icons/GmailIcon';
 import { LinkedinIcon } from '../components/icons/LinkedinIcon';
 import { TelegramIcon } from '../components/icons/TelegramIcon';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 import { FC } from 'react';
 
@@ -63,8 +64,12 @@ export default function Home() {
   const [isHovered, setIsHovered] = useState(false);
   const [visibleProjects, setVisibleProjects] = useState<Project[]>([]);
   const [indexOffset, setIndexOffset] = useState(0);
+  const [token, setToken] = useState<string | null>(null);
+  const hcaptchaRef = useRef<HCaptcha | null>(null);
 
   const scrollBy = 300;
+  const sitekey = process.env.NEXT_PUBLIC_HCAPTCHA_SITEKEY!;
+
 
   const scrollLeft = () => {
     if (carouselRef.current) {
@@ -173,12 +178,16 @@ export default function Home() {
     }
 
     try {
+      if (!token) {
+        setFeedback('Captcha token missing');
+        return;
+      }
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email, message }),
+        body: JSON.stringify({ name, email, message, hcaptchaToken: token }),
       });
 
       const data = await res.json();
@@ -279,6 +288,13 @@ export default function Home() {
               rows={5}
               value={formData.message}
               onChange={handleChange}
+              />
+              <HCaptcha
+                sitekey={sitekey}
+                onVerify={(token) => {
+                  setToken(token);
+                }}
+                ref={hcaptchaRef}
               />
               <button type="submit" className={contactStyles.button}>{texts.contactForm.send}</button>
           </form>
