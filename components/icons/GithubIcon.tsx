@@ -1,3 +1,5 @@
+import styles from './GithubIcon.module.css';
+
 interface IconProps {
   theme: 'light' | 'dark';
   size?: number;
@@ -11,14 +13,7 @@ export const GithubIcon = ({ theme, size = 32 }: IconProps) => (
     xmlns="http://www.w3.org/2000/svg"
     role="img"
     aria-label="GitHub"
-    style={{
-      fill: theme === 'dark' ? '#ffffff' : '#000000',
-      filter:
-        theme === 'dark'
-          ? 'drop-shadow(2px 2px 2px #000)'
-          : 'drop-shadow(2px 2px 2px #ccc)',
-      transition: 'all 0.3s ease',
-    }}
+    className={theme === 'dark' ? styles.iconDark : styles.iconLight}
   >
     <path
       fillRule="evenodd"
