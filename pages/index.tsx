@@ -162,7 +162,7 @@ export default function Home() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!texts) return;
 
@@ -172,8 +172,26 @@ export default function Home() {
       return;
     }
 
-    setFeedback(texts.contactForm.success);
-    setFormData({ name: '', email: '', message: '' });
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setFeedback(texts.contactForm.success);
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setFeedback(data.message || texts.contactForm.error);
+      }
+    } catch (err) {
+      setFeedback(texts.contactForm.error);
+    }
   };
 
   useEffect(() => {
@@ -279,7 +297,7 @@ export default function Home() {
                 <a
                   key={item.label}
                   href={item.url}
-                  className={socialStyles.socialLink}
+                  className={`${socialStyles.socialLink} ${theme === 'light' ? socialStyles.socialLinkLight : socialStyles.socialLinkDark}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

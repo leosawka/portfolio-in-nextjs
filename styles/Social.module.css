@@ -64,6 +64,16 @@
   transition: transform 0.2s;
 }
 
+.socialLinkLight {
+  background-color: #404040;
+  color: #fff;
+}
+
+.socialLinkDark {
+  background-color: #f5f5f5;
+  color: #000;
+}
+
 .socialLink:hover {
   transform: scale(1.05);
 }

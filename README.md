@@ -8,6 +8,7 @@ This is my personal portfolio built with Next.js and TypeScript.
 - Fully responsive layout inspired by mobile-first design
 - Modern layout using CSS Modules (no TailwindCSS)
 - Hosted on Vercel with GitHub integration
+- Contact form messages sent directly via Telegram bot
 
 # *Planned sections:*
 - Profile
@@ -39,6 +40,7 @@ Este es mi portfolio personal hecho con Next.js y TypeScript.
 - Vista completamente "responsive" inspirada por un diseño "mobile-first"
 - Vista moderna usando módulos CSS (no TailwindCSS)
 - Alojado en Vercel con integración de GitHub
+- Mensajes del formulario de contacto enviados directamente vía bot de Telegram
 
 # *Secciones planeadas:*
 - Perfil
