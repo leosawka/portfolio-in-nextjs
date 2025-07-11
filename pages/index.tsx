@@ -59,12 +59,13 @@ export default function Home() {
   const { theme } = useTheme();
   const [texts, setTexts] = useState<TextContent | null>(null);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [feedback, setFeedback] = useState('');
-  const carouselRef = useRef<HTMLDivElement | null>(null);
+  const [feedback, setFeedback] = useState<{ message: string; isError: boolean } | null>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [visibleProjects, setVisibleProjects] = useState<Project[]>([]);
   const [indexOffset, setIndexOffset] = useState(0);
   const [token, setToken] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState(false);
+  const carouselRef = useRef<HTMLDivElement | null>(null);
   const hcaptchaRef = useRef<HCaptcha | null>(null);
 
   const scrollBy = 300;
@@ -173,13 +174,13 @@ export default function Home() {
 
     const { name, email, message } = formData;
     if (!name || !email || !message) {
-      setFeedback(texts.contactForm.error);
+      setFeedback({ message: texts.contactForm.error, isError: true });
       return;
     }
 
     try {
       if (!token) {
-        setFeedback('Captcha token missing');
+        setFeedback({ message: 'Captcha token missing', isError: true });
         return;
       }
       const res = await fetch('/api/contact', {
@@ -193,13 +194,14 @@ export default function Home() {
       const data = await res.json();
 
       if (res.ok) {
-        setFeedback(texts.contactForm.success);
+        setFeedback({ message: texts.contactForm.success, isError: false });
         setFormData({ name: '', email: '', message: '' });
+        setSubmitted(true);
       } else {
-        setFeedback(data.message || texts.contactForm.error);
+        setFeedback({ message: data.message || texts.contactForm.error, isError: true });
       }
     } catch (err) {
-      setFeedback(texts.contactForm.error);
+      setFeedback({ message: texts.contactForm.error, isError: true });
     }
   };
 
@@ -208,6 +210,20 @@ export default function Home() {
       .then((res) => res.json())
       .then(setTexts);
   }, [language]);
+
+  useEffect(() => {
+    if (!feedback || !texts?.contactForm) return;
+
+    const updatedMessage = feedback.isError
+      ? texts.contactForm.error
+      : texts.contactForm.success;
+
+    if (updatedMessage) {
+      setFeedback({ ...feedback, message: updatedMessage });
+    }
+  }, [texts]);
+
+
 
   if (!texts) return <p>Loading...</p>;
 
@@ -273,6 +289,7 @@ export default function Home() {
               placeholder={texts.contactForm.name}
               value={formData.name}
               onChange={handleChange}
+              disabled={submitted}
               />
               <input
               name="email"
@@ -280,6 +297,7 @@ export default function Home() {
               placeholder={texts.contactForm.email}
               value={formData.email}
               onChange={handleChange}
+              disabled={submitted}
               />
               <textarea
               name="message"
@@ -288,6 +306,7 @@ export default function Home() {
               rows={5}
               value={formData.message}
               onChange={handleChange}
+              disabled={submitted}
               />
               <HCaptcha
                 sitekey={sitekey}
@@ -296,12 +315,12 @@ export default function Home() {
                 }}
                 ref={hcaptchaRef}
               />
-              <button type="submit" className={contactStyles.button}>{texts.contactForm.send}</button>
+              <button type="submit" className={contactStyles.button} disabled={!token || submitted}>{texts.contactForm.send}</button>
           </form>
           {feedback && (
-              <p className={feedback === texts.contactForm.success ? contactStyles.success : contactStyles.error}>
-              {feedback}
-              </p>
+            <p style={{ color: feedback.isError ? 'red' : 'limegreen' }}>
+              {feedback.message}
+            </p>
           )}
         </section>
         <section className={`${socialStyles.socialSection} ${theme === 'light' ? socialStyles.socialSectionLight : socialStyles.socialSectionDark}`}>
