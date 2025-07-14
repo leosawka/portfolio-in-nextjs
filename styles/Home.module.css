@@ -1,16 +1,14 @@
 .aboutSection {
   gap: 2rem;
-  margin: auto;
-}
-.aboutSectionCard {
   display: flex;
-  background-color: #404040;
-  padding: 2rem;
   align-items: center;
-  gap: 2rem;
+}
+
+.cardAtributes {
+  padding: 2rem;
+  margin: 2rem auto 0 auto;
   max-width: 90vw;
   border-radius: 10px;
-  margin: auto;
 }
 
 .aboutLight {
@@ -28,8 +26,8 @@
 }
 
 .aboutSectionCardImgLight {
-  height: 500px;
-  width: 500px;
+  height: 25rem;
+  width: 25rem;
   margin: 0 5vw;
   padding: .5px;
   border-radius: 50%;
@@ -37,24 +35,25 @@
 }
 
 .aboutSectionCardImgDark {
-  height: 500px;
-  width: 500px;
+  height: 25rem;
+  width: 25rem;
   margin: 0 5vw;
   padding: .5px;
   border-radius: 50%;
   box-shadow: 4px 2px 12px 2px rgba(85, 85, 85, 0.654);
 }
 
-.aboutSectionCard p {
-  width: 40vw;
+.aboutSection p {
+  width: 50vw;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
-.aboutSectionCard h1 {
+.aboutSection h1 {
   width: 40vw;
 }
 
 .aboutTitle {
-  font-size: 2rem;
   margin-bottom: 1rem;
 }
 
@@ -63,11 +62,21 @@
   line-height: 1.6;
 }
 
-/* Responsive: mobile-first */
+@media (max-width: 1366px) {
+  .aboutSection p {
+  width: auto;
+  text-align: justify;
+  text-justify: inter-word;
+}
+}
+
+@media (max-width: 1024px) {
+.aboutSection {
+  flex-direction: column;
+}
+}
+
 @media (min-width: 768px) {
-  .aboutSection {
-    padding: 4rem;
-  }
 
   .aboutTitle {
     font-size: 2.5rem;
@@ -114,4 +123,10 @@
 
 .badge:hover {
   transform: scale(1.05);
+}
+
+@media (max-width: 430px) {
+  .aboutSection img {
+    display: none;
+  }
 }

@@ -229,18 +229,16 @@ export default function Home() {
 
   return (
     <>
-        <section className={styles.aboutSection}>
-            <div className={`${styles.aboutSectionCard} ${theme === 'light' ? styles.aboutLight : styles.aboutDark}`}>
-                <img className={`${theme === 'light' ? styles.aboutSectionCardImgLight : styles.aboutSectionCardImgDark}`} src={'https://media.licdn.com/dms/image/v2/D4D03AQHZT1Nq5ncR5Q/profile-displayphoto-shrink_800_800/B4DZOceIYUHgAc-/0/1733496965288?e=1757548800&v=beta&t=ntug2Y_Vfocs_FcRNV1-Z0X9-y6vkeWfNYACXLlvSPo'} 
-                    alt='profile image' 
-                />
-                <div>
-                    <h1 className={styles.aboutTitle}>{texts.greeting}</h1>
-                    <p className={styles.aboutText}>{texts.about}</p>
-                </div>
+        <section className={`${styles.aboutSection} ${styles.cardAtributes} ${theme === 'light' ? styles.aboutLight : styles.aboutDark}`}>
+            <img className={`${theme === 'light' ? styles.aboutSectionCardImgLight : styles.aboutSectionCardImgDark}`} src={'https://media.licdn.com/dms/image/v2/D4D03AQHZT1Nq5ncR5Q/profile-displayphoto-shrink_800_800/B4DZOceIYUHgAc-/0/1733496965288?e=1757548800&v=beta&t=ntug2Y_Vfocs_FcRNV1-Z0X9-y6vkeWfNYACXLlvSPo'} 
+                alt='profile image' 
+            />
+            <div>
+                <h1 className={styles.aboutTitle}>{texts.greeting}</h1>
+                <p className={styles.aboutText}>{texts.about}</p>
             </div>
         </section>
-        <section className={`${styles.skillsSection} ${theme === 'light' ? styles.skillsSectionLight : styles.skillsSectionDark}`}>
+        <section className={`${styles.cardAtributes} ${theme === 'light' ? styles.skillsSectionLight : styles.skillsSectionDark}`}>
             <h2 className={styles.skillsTitle}>{texts.skills}</h2>
             <div className={styles.badges}>
                 {texts.stack.map((tech) => (
@@ -250,7 +248,7 @@ export default function Home() {
                 ))}
             </div>
         </section>
-        <section className={`${projectStyles.projectsSection} ${theme === 'light' ? projectStyles.projectsSectionLight : projectStyles.projectsSectionDark}`}>
+        <section className={`${styles.cardAtributes} ${theme === 'light' ? projectStyles.projectsSectionLight : projectStyles.projectsSectionDark}`}>
           <h2 className={projectStyles.projectsTitle}>{texts.projectsTitle}</h2>
           <div className={projectStyles.projectsGridWrapper}>
             <button className={`${projectStyles.carouselButton} ${projectStyles.carouselButtonLeft}`} onClick={scrollLeft}>
@@ -280,7 +278,7 @@ export default function Home() {
             </button>
           </div>
         </section>
-        <section className={`${contactStyles.contact} ${theme === 'light' ? contactStyles.contactLight : contactStyles.contactDark}`}>
+        <section className={`${styles.cardAtributes} ${theme === 'light' ? contactStyles.contactLight : contactStyles.contactDark}`}>
           <h2 className={contactStyles.contactTitle}>{texts.contactTitle}</h2>
           <form className={contactStyles.form} onSubmit={handleSubmit}>
               <input
@@ -323,7 +321,7 @@ export default function Home() {
             </p>
           )}
         </section>
-        <section className={`${socialStyles.socialSection} ${theme === 'light' ? socialStyles.socialSectionLight : socialStyles.socialSectionDark}`}>
+        <section className={`${styles.cardAtributes} ${theme === 'light' ? socialStyles.socialSectionLight : socialStyles.socialSectionDark}`}>
           <h2 className={socialStyles.socialTitle}>{texts.socialTitle}</h2>
           <div className={socialStyles.socialLinks}>
             {texts.social.map((item) => {
