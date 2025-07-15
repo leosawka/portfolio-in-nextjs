@@ -11,6 +11,7 @@ import { GmailIcon } from '../components/icons/GmailIcon';
 import { LinkedinIcon } from '../components/icons/LinkedinIcon';
 import { TelegramIcon } from '../components/icons/TelegramIcon';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
+import techColors from '../src/utils/techColors';
 
 import { FC } from 'react';
 
@@ -27,6 +28,25 @@ interface SocialItem {
   icon: string;
 }
 
+interface WorkContent {
+  iconImage: string;
+  from: string;
+  to: string;
+  jobtitle: string;
+  company: string;
+  highlights: string[];
+  tecnologies: string[];
+}
+
+interface WorkHeads {
+  from: string;
+  to: string;
+  position: string;
+  company: string;
+  highlights: string;
+  technologies: string;
+}
+
 interface Project {
   title: string;
   description: string;
@@ -38,6 +58,9 @@ interface TextContent {
   greeting: string;
   about: string;
   skills: string;
+  workExperienceTitle: string;
+  workLabels: WorkHeads;
+  workExperience: WorkContent[];
   stack: string[];
   projectsTitle: string;
   projects: Project[];
@@ -169,42 +192,42 @@ export default function Home() {
   };
 
   const handleSubmit = async (e: FormEvent) => {
-  e.preventDefault();
-  if (!texts) return;
+    e.preventDefault();
+    if (!texts) return;
 
-  const { name, email, message } = formData;
+    const { name, email, message } = formData;
 
-  if (!name || !email || !message) {
-    setFeedback({ message: texts.contactForm.error, isError: true });
-    return;
-  }
-
-  if (!token) {
-    hcaptchaRef.current?.execute();
-    return;
-  }
-
-  try {
-    const res = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, message, hcaptchaToken: token }),
-    });
-
-    const data = await res.json();
-
-    if (res.ok) {
-      setFeedback({ message: texts.contactForm.success, isError: false });
-      setFormData({ name: '', email: '', message: '' });
-      setSubmitted(true);
-      setToken(null);
-    } else {
-      setFeedback({ message: data.message || texts.contactForm.error, isError: true });
+    if (!name || !email || !message) {
+      setFeedback({ message: texts.contactForm.error, isError: true });
+      return;
     }
-  } catch (err) {
-    setFeedback({ message: texts.contactForm.error, isError: true });
-  }
-};
+
+    if (!token) {
+      hcaptchaRef.current?.execute();
+      return;
+    }
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message, hcaptchaToken: token }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setFeedback({ message: texts.contactForm.success, isError: false });
+        setFormData({ name: '', email: '', message: '' });
+        setSubmitted(true);
+        setToken(null);
+      } else {
+        setFeedback({ message: data.message || texts.contactForm.error, isError: true });
+      }
+    } catch (err) {
+      setFeedback({ message: texts.contactForm.error, isError: true });
+    }
+  };
 
   useEffect(() => {
     fetch(`/api/texts?lang=${language}`)
@@ -237,121 +260,162 @@ export default function Home() {
 
   return (
     <>
-        <section className={`${styles.aboutSection} ${styles.cardAtributes} ${theme === 'light' ? styles.aboutLight : styles.aboutDark}`}>
-            <img className={`${theme === 'light' ? styles.aboutSectionCardImgLight : styles.aboutSectionCardImgDark}`} src={'https://media.licdn.com/dms/image/v2/D4D03AQHZT1Nq5ncR5Q/profile-displayphoto-shrink_800_800/B4DZOceIYUHgAc-/0/1733496965288?e=1757548800&v=beta&t=ntug2Y_Vfocs_FcRNV1-Z0X9-y6vkeWfNYACXLlvSPo'} 
-                alt='profile image' 
-            />
-            <div>
-                <h1 className={styles.aboutTitle}>{texts.greeting}</h1>
-                <p className={styles.aboutText}>{texts.about}</p>
-            </div>
-        </section>
-        <section className={`${styles.cardAtributes} ${theme === 'light' ? styles.skillsSectionLight : styles.skillsSectionDark}`}>
-            <h2 className={styles.skillsTitle}>{texts.skills}</h2>
-            <div className={styles.badges}>
-                {texts.stack.map((tech) => (
-                <span key={tech} className={styles.badge}>
-                    {tech}
-                </span>
-                ))}
-            </div>
-        </section>
-        <section className={`${styles.cardAtributes} ${theme === 'light' ? projectStyles.projectsSectionLight : projectStyles.projectsSectionDark}`}>
-          <h2 className={projectStyles.projectsTitle}>{texts.projectsTitle}</h2>
-          <div className={projectStyles.projectsGridWrapper}>
-            <button className={`${projectStyles.carouselButton} ${projectStyles.carouselButtonLeft}`} onClick={scrollLeft}>
-              ‹
-            </button>
-            <div
-              className={projectStyles.projectsGrid}
-              ref={carouselRef}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-            >
-              {visibleProjects.map((project, index) => (
-                <div key={`${project.title}-${index}`} className={projectStyles.projectCard}>
-                  <img src={project.image} alt={project.title} className={projectStyles.projectImage} />
-                  <div className={projectStyles.projectContent}>
-                    <h3>{project.title}</h3>
-                    <p>{project.description}</p>
-                    <a href={project.link} target="_blank" rel="noopener noreferrer">
-                      View Project →
-                    </a>
+      <section className={`${styles.aboutSection} ${styles.cardAtributes} ${theme === 'light' ? styles.aboutLight : styles.aboutDark}`}>
+        <img className={`${theme === 'light' ? styles.aboutSectionCardImgLight : styles.aboutSectionCardImgDark}`} src={'https://media.licdn.com/dms/image/v2/D4D03AQHZT1Nq5ncR5Q/profile-displayphoto-shrink_800_800/B4DZOceIYUHgAc-/0/1733496965288?e=1757548800&v=beta&t=ntug2Y_Vfocs_FcRNV1-Z0X9-y6vkeWfNYACXLlvSPo'}
+          alt='profile image'
+        />
+        <div>
+          <h1 className={styles.aboutTitle}>{texts.greeting}</h1>
+          <p className={styles.aboutText}>{texts.about}</p>
+        </div>
+      </section>
+      <section className={`${styles.cardAtributes} ${theme === 'light' ? styles.skillsSectionLight : styles.skillsSectionDark}`}>
+        <h2 className={styles.skillsTitle}>{texts.workExperienceTitle}</h2>
+        <div className={styles.experienceCard}>
+          {texts.workExperience.map((exp, id) => (
+            <div key={id} className={`${styles.experienceCardElement} ${theme === 'light' ? styles.experienceCardLight : styles.experienceCardDark}`} style={{ whiteSpace: 'pre-line' }}>
+              {texts.workLabels.from} {exp.from} {texts.workLabels.to} {exp.to} <br />
+              <div>
+                <strong>{texts.workLabels.company}:</strong> {exp.company} — <strong>{texts.workLabels.position}:</strong> {exp.jobtitle}
+              </div>
+              <strong>{texts.workLabels.highlights}:</strong>
+              {exp.highlights.map((highlight) => `• ${highlight}`).join('\n')}
+              <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', marginTop: '1rem' }}>
+                <div style={{ marginTop: '1rem' }}>
+                  <strong>{texts.workLabels.technologies}:</strong>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.5rem' }}>
+                    {exp.tecnologies.map((tech, i) => {
+                      const bg = techColors[tech] || techColors.default;
+                      const color = ['#f0db4f', '#fcd535', '#ffff99'].includes(bg) ? '#000' : '#fff';
+                      return (
+                        <div
+                          key={i}
+                          style={{
+                            backgroundColor: bg,
+                            color,
+                            padding: '.25rem .75rem',
+                            borderRadius: '10px',
+                            fontSize: '0.9rem',
+                            fontWeight: 600,
+                          }}
+                        >
+                          {tech}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
-            <button className={`${projectStyles.carouselButton} ${projectStyles.carouselButtonRight}`} onClick={scrollRight}>
-              ›
-            </button>
+          ))}
+        </div>
+      </section>
+      <section className={`${styles.cardAtributes} ${theme === 'light' ? styles.skillsSectionLight : styles.skillsSectionDark}`}>
+        <h2 className={styles.skillsTitle}>{texts.skills}</h2>
+        <div className={styles.badges}>
+          {texts.stack.map((tech) => (
+            <span key={tech} className={styles.badge}>
+              {tech}
+            </span>
+          ))}
+        </div>
+      </section>
+      <section className={`${styles.cardAtributes} ${theme === 'light' ? projectStyles.projectsSectionLight : projectStyles.projectsSectionDark}`}>
+        <h2 className={projectStyles.projectsTitle}>{texts.projectsTitle}</h2>
+        <div className={projectStyles.projectsGridWrapper}>
+          <button className={`${projectStyles.carouselButton} ${projectStyles.carouselButtonLeft}`} onClick={scrollLeft}>
+            ‹
+          </button>
+          <div
+            className={projectStyles.projectsGrid}
+            ref={carouselRef}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            {visibleProjects.map((project, index) => (
+              <div key={`${project.title}-${index}`} className={projectStyles.projectCard}>
+                <img src={project.image} alt={project.title} className={projectStyles.projectImage} />
+                <div className={projectStyles.projectContent}>
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
+                  <a href={project.link} target="_blank" rel="noopener noreferrer">
+                    View Project →
+                  </a>
+                </div>
+              </div>
+            ))}
           </div>
-        </section>
-        <section className={`${styles.cardAtributes} ${theme === 'light' ? contactStyles.contactLight : contactStyles.contactDark}`}>
-          <h2 className={contactStyles.contactTitle}>{texts.contactTitle}</h2>
-          <form className={contactStyles.form} onSubmit={handleSubmit}>
-              <input
-              name="name"
-              className={contactStyles.input}
-              placeholder={texts.contactForm.name}
-              value={formData.name}
-              onChange={handleChange}
-              disabled={submitted}
-              />
-              <input
-              name="email"
-              className={contactStyles.input}
-              placeholder={texts.contactForm.email}
-              value={formData.email}
-              onChange={handleChange}
-              disabled={submitted}
-              />
-              <textarea
-              name="message"
-              className={contactStyles.textarea}
-              placeholder={texts.contactForm.message}
-              rows={5}
-              value={formData.message}
-              onChange={handleChange}
-              disabled={submitted}
-              />
-              <HCaptcha
-                sitekey={sitekey}
-                size='invisible'
-                onVerify={handleCaptchaVerify}
-                ref={hcaptchaRef}
-              />
-              <button type="submit" className={contactStyles.button} disabled={!token || submitted}>{texts.contactForm.send}</button>
-          </form>
-          {feedback && (
-            <p style={{ color: feedback.isError ? 'red' : 'limegreen' }}>
-              {feedback.message}
-            </p>
-          )}
-        </section>
-        <section className={`${socialStyles.socialSection} ${styles.cardAtributes} ${theme === 'light' ? socialStyles.socialSectionLight : socialStyles.socialSectionDark}`}>
-          <h2 className={socialStyles.socialTitle}>{texts.socialTitle}</h2>
-          <div className={socialStyles.socialLinks}>
-            {texts.social.map((item) => {
-              const IconComponent = iconMap[item.label];
-              return (
-                <a
-                  key={item.label}
-                  href={item.url}
-                  className={`${socialStyles.socialLink} ${theme === 'light' ? socialStyles.socialLinkLight : socialStyles.socialLinkDark}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+          <button className={`${projectStyles.carouselButton} ${projectStyles.carouselButtonRight}`} onClick={scrollRight}>
+            ›
+          </button>
+        </div>
+      </section>
+      <section className={`${styles.cardAtributes} ${theme === 'light' ? contactStyles.contactLight : contactStyles.contactDark}`}>
+        <h2 className={contactStyles.contactTitle}>{texts.contactTitle}</h2>
+        <form className={contactStyles.form} onSubmit={handleSubmit}>
+          <input
+            name="name"
+            className={contactStyles.input}
+            placeholder={texts.contactForm.name}
+            value={formData.name}
+            onChange={handleChange}
+            disabled={submitted}
+          />
+          <input
+            name="email"
+            className={contactStyles.input}
+            placeholder={texts.contactForm.email}
+            value={formData.email}
+            onChange={handleChange}
+            disabled={submitted}
+          />
+          <textarea
+            name="message"
+            className={contactStyles.textarea}
+            placeholder={texts.contactForm.message}
+            rows={5}
+            value={formData.message}
+            onChange={handleChange}
+            disabled={submitted}
+          />
+          <HCaptcha
+            sitekey={sitekey}
+            size='invisible'
+            onVerify={handleCaptchaVerify}
+            ref={hcaptchaRef}
+          />
+          <button type="submit" className={contactStyles.button} disabled={!token || submitted}>{texts.contactForm.send}</button>
+        </form>
+        {feedback && (
+          <p style={{ color: feedback.isError ? 'red' : 'limegreen' }}>
+            {feedback.message}
+          </p>
+        )}
+      </section>
+      <section className={`${socialStyles.socialSection} ${styles.cardAtributes} ${theme === 'light' ? socialStyles.socialSectionLight : socialStyles.socialSectionDark}`}>
+        <h2 className={socialStyles.socialTitle}>{texts.socialTitle}</h2>
+        <div className={socialStyles.socialLinks}>
+          {texts.social.map((item) => {
+            const IconComponent = iconMap[item.label];
+            return (
+              <a
+                key={item.label}
+                href={item.url}
+                className={`${socialStyles.socialLink} ${theme === 'light' ? socialStyles.socialLinkLight : socialStyles.socialLinkDark}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div
+                  className={`${socialStyles.iconWrapper} ${theme === 'light' ? socialStyles.light : socialStyles.dark}`}
                 >
-                  <div
-                    className={`${socialStyles.iconWrapper} ${theme === 'light' ? socialStyles.light : socialStyles.dark}`}
-                  >
-                    {IconComponent && <IconComponent theme={theme} size={24} />}
-                  </div>
-                  <span>{item.label}</span>
-                </a>
-              );
-            })}
-          </div>
-        </section>
+                  {IconComponent && <IconComponent theme={theme} size={24} />}
+                </div>
+                <span>{item.label}</span>
+              </a>
+            );
+          })}
+        </div>
+      </section>
     </>
   );
 }

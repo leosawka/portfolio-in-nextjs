@@ -63,6 +63,32 @@
   line-height: 1.6;
 }
 
+.experienceCard {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.experienceCardElement {
+  flex-direction: column;
+  align-items:start;
+  border-radius: 10px;
+  padding: 1rem;
+  display: flex;
+  margin: 0 1rem 2rem 0;
+  width: 100%;
+}
+
+.experienceCardLight {
+  background-color: #000;
+  color: #fff;
+}
+
+.experienceCardDark {
+  background-color: #404040;
+  color: #fff;
+}
+
 @media (max-width: 1366px) {
   .aboutSection p {
     width: auto;
