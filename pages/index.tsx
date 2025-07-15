@@ -169,41 +169,42 @@ export default function Home() {
   };
 
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    if (!texts) return;
+  e.preventDefault();
+  if (!texts) return;
 
-    const { name, email, message } = formData;
-    if (!name || !email || !message) {
-      setFeedback({ message: texts.contactForm.error, isError: true });
-      return;
+  const { name, email, message } = formData;
+
+  if (!name || !email || !message) {
+    setFeedback({ message: texts.contactForm.error, isError: true });
+    return;
+  }
+
+  if (!token) {
+    hcaptchaRef.current?.execute();
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, message, hcaptchaToken: token }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      setFeedback({ message: texts.contactForm.success, isError: false });
+      setFormData({ name: '', email: '', message: '' });
+      setSubmitted(true);
+      setToken(null);
+    } else {
+      setFeedback({ message: data.message || texts.contactForm.error, isError: true });
     }
-
-    try {
-      if (!token) {
-        setFeedback({ message: 'Captcha token missing', isError: true });
-        return;
-      }
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, email, message, hcaptchaToken: token }),
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        setFeedback({ message: texts.contactForm.success, isError: false });
-        setFormData({ name: '', email: '', message: '' });
-        setSubmitted(true);
-      } else {
-        setFeedback({ message: data.message || texts.contactForm.error, isError: true });
-      }
-    } catch (err) {
-      setFeedback({ message: texts.contactForm.error, isError: true });
-    }
-  };
+  } catch (err) {
+    setFeedback({ message: texts.contactForm.error, isError: true });
+  }
+};
 
   useEffect(() => {
     fetch(`/api/texts?lang=${language}`)
@@ -223,6 +224,13 @@ export default function Home() {
     }
   }, [texts]);
 
+  const handleCaptchaVerify = (newToken: string) => {
+    setToken(newToken);
+
+    if (formData.name && formData.email && formData.message) {
+      handleSubmit(new Event('submit') as unknown as FormEvent);
+    }
+  };
 
 
   if (!texts) return <p>Loading...</p>;
@@ -308,9 +316,8 @@ export default function Home() {
               />
               <HCaptcha
                 sitekey={sitekey}
-                onVerify={(token) => {
-                  setToken(token);
-                }}
+                size='invisible'
+                onVerify={handleCaptchaVerify}
                 ref={hcaptchaRef}
               />
               <button type="submit" className={contactStyles.button} disabled={!token || submitted}>{texts.contactForm.send}</button>
@@ -321,7 +328,7 @@ export default function Home() {
             </p>
           )}
         </section>
-        <section className={`${styles.cardAtributes} ${theme === 'light' ? socialStyles.socialSectionLight : socialStyles.socialSectionDark}`}>
+        <section className={`${socialStyles.socialSection} ${styles.cardAtributes} ${theme === 'light' ? socialStyles.socialSectionLight : socialStyles.socialSectionDark}`}>
           <h2 className={socialStyles.socialTitle}>{texts.socialTitle}</h2>
           <div className={socialStyles.socialLinks}>
             {texts.social.map((item) => {

@@ -44,9 +44,10 @@
 }
 
 .aboutSection p {
-  width: 50vw;
+  width: auto;
   text-align: justify;
   text-justify: inter-word;
+  padding-right: 5rem;
 }
 
 .aboutSection h1 {
@@ -64,15 +65,19 @@
 
 @media (max-width: 1366px) {
   .aboutSection p {
-  width: auto;
-  text-align: justify;
-  text-justify: inter-word;
+    width: auto;
+    text-align: justify;
+    text-justify: inter-word;
 }
 }
 
 @media (max-width: 1024px) {
 .aboutSection {
   flex-direction: column;
+}
+.aboutSection p {
+  width: auto;
+  padding-right: 0;
 }
 }
 

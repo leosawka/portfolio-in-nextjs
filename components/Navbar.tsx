@@ -1,4 +1,5 @@
 import styles from '../styles/Navbar.module.css';
+import homeStyles from '../styles/Home.module.css'
 import { useTheme } from '../contexts/ThemeContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import LanguageDropdown from './LanguageDropdown';
@@ -9,7 +10,7 @@ export default function Navbar() {
   const { language, setLanguage } = useLanguage();
 
   return (
-    <nav className={`${styles.navbar} ${theme === 'light' ? styles.navbarLight : styles.navbarDark}`}>
+    <nav className={`${homeStyles.navbar} ${styles.navbar} ${theme === 'light' ? styles.navbarLight : styles.navbarDark}`}>
       <div className={styles.left}>
         <h1>Jairo Leonardo Olivera Sawka</h1>
         <p>-</p>
