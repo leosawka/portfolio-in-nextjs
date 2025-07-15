@@ -91,6 +91,8 @@ export default function Home() {
   const carouselRef = useRef<HTMLDivElement | null>(null);
   const hcaptchaRef = useRef<HCaptcha | null>(null);
 
+  const pendingSubmission = useRef(false);
+
   const scrollBy = 300;
   const sitekey = process.env.NEXT_PUBLIC_HCAPTCHA_SITEKEY!;
 
@@ -191,6 +193,31 @@ export default function Home() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const submitFormWithToken = async (tokenToUse: string) => {
+  try {
+    console.log("🟢 Enviando datos al backend:", { ...formData, hcaptchaToken: tokenToUse });
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...formData, hcaptchaToken: tokenToUse }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      setFeedback({ message: texts?.contactForm.success || 'Success!', isError: false });
+      setFormData({ name: '', email: '', message: '' });
+      setSubmitted(true);
+      setToken(null);
+    } else {
+      setFeedback({ message: data.message || texts?.contactForm.error, isError: true });
+    }
+  } catch {
+    console.log("🔴 Error inesperado al enviar mensaje.");
+    setFeedback({ message: texts?.contactForm.error || 'Something went wrong.', isError: true });
+  }
+};
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!texts) return;
@@ -203,30 +230,12 @@ export default function Home() {
     }
 
     if (!token) {
+      pendingSubmission.current = true;
       hcaptchaRef.current?.execute();
       return;
     }
 
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, message, hcaptchaToken: token }),
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        setFeedback({ message: texts.contactForm.success, isError: false });
-        setFormData({ name: '', email: '', message: '' });
-        setSubmitted(true);
-        setToken(null);
-      } else {
-        setFeedback({ message: data.message || texts.contactForm.error, isError: true });
-      }
-    } catch (err) {
-      setFeedback({ message: texts.contactForm.error, isError: true });
-    }
+    submitFormWithToken(token);
   };
 
   useEffect(() => {
@@ -248,12 +257,12 @@ export default function Home() {
   }, [texts]);
 
   const handleCaptchaVerify = (newToken: string) => {
-    setToken(newToken);
-
-    if (formData.name && formData.email && formData.message) {
-      handleSubmit(new Event('submit') as unknown as FormEvent);
-    }
-  };
+  setToken(newToken);
+  if (pendingSubmission.current) {
+    submitFormWithToken(newToken);
+    pendingSubmission.current = false;
+  }
+};
 
 
   if (!texts) return <p>Loading...</p>;
@@ -352,7 +361,7 @@ export default function Home() {
       </section>
       <section className={`${styles.cardAtributes} ${theme === 'light' ? contactStyles.contactLight : contactStyles.contactDark}`}>
         <h2 className={contactStyles.contactTitle}>{texts.contactTitle}</h2>
-        <form className={contactStyles.form} onSubmit={handleSubmit}>
+        <form className={`${contactStyles.form}`} onSubmit={handleSubmit}>
           <input
             name="name"
             className={contactStyles.input}
@@ -378,12 +387,14 @@ export default function Home() {
             onChange={handleChange}
             disabled={submitted}
           />
-          <HCaptcha
-            sitekey={sitekey}
-            size='invisible'
-            onVerify={handleCaptchaVerify}
-            ref={hcaptchaRef}
-          />
+          <div className={contactStyles.captchaWrapper}>
+            <HCaptcha
+              sitekey={sitekey}
+              size='normal'
+              onVerify={handleCaptchaVerify}
+              ref={hcaptchaRef}
+            />
+          </div>
           <button type="submit" className={contactStyles.button} disabled={!token || submitted}>{texts.contactForm.send}</button>
         </form>
         {feedback && (

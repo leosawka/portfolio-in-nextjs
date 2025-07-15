@@ -37,12 +37,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const hcaptchaSecret = process.env.HCAPTCHA_SECRET;
+  console.log("HCAPTCHA_SECRET:", !!process.env.HCAPTCHA_SECRET);
 
   if (!hcaptchaToken) {
     return res.status(400).json({ message: t.captchaMissing });
   }
 
   try {
+    console.log("[Contacto] Recibido token:", hcaptchaToken);
     const hcaptchaRes = await fetch('https://hcaptcha.com/siteverify', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -61,7 +63,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const telegramBotToken = process.env.TELEGRAM_BOT_TOKEN;
+  console.log("TELEGRAM_BOT_TOKEN:", !!process.env.TELEGRAM_BOT_TOKEN);
   const telegramChatId = process.env.TELEGRAM_CHAT_ID;
+console.log("TELEGRAM_CHAT_ID:", !!process.env.TELEGRAM_CHAT_ID);
 
   const text = `*Nuevo mensaje de contacto*\nNombre: ${name}\nEmail: ${email}\nMensaje:\n${message}`;
 
