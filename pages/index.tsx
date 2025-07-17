@@ -10,10 +10,12 @@ import { GithubIcon } from '../components/icons/GithubIcon';
 import { GmailIcon } from '../components/icons/GmailIcon';
 import { LinkedinIcon } from '../components/icons/LinkedinIcon';
 import { TelegramIcon } from '../components/icons/TelegramIcon';
+import { isEmailValid } from '../src/utils/validateEmail';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import techColors from '../src/utils/techColors';
 
 import { FC } from 'react';
+import Toast from '../components/Toast';
 
 const iconMap: Record<string, FC<{ theme: 'light' | 'dark'; size?: number }>> = {
   Github: GithubIcon,
@@ -74,6 +76,11 @@ interface TextContent {
     send: string;
     success: string;
     error: string;
+    invalidFormat: string;
+    disposableEmail: string;
+    errorName: string;
+    errorEmail: string;
+    errorMessage: string;
   };
 }
 
@@ -82,7 +89,8 @@ export default function Home() {
   const { theme } = useTheme();
   const [texts, setTexts] = useState<TextContent | null>(null);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [feedback, setFeedback] = useState<{ message: string; isError: boolean } | null>(null);
+  const [feedback, setFeedback] = useState<{ message: string; isError: boolean;field?: 'name' | 'email' | 'message' | 'general';
+} | null>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [visibleProjects, setVisibleProjects] = useState<Project[]>([]);
   const [indexOffset, setIndexOffset] = useState(0);
@@ -108,6 +116,12 @@ export default function Home() {
       carouselRef.current.scrollBy({ left: scrollBy, behavior: 'smooth' });
     }
   };
+
+  useEffect(() => {
+    if (!feedback) return;
+    const timeout = setTimeout(() => setFeedback(null), 3500);
+    return () => clearTimeout(timeout);
+  }, [feedback]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -195,7 +209,6 @@ export default function Home() {
 
   const submitFormWithToken = async (tokenToUse: string) => {
   try {
-    console.log("🟢 Enviando datos al backend:", { ...formData, hcaptchaToken: tokenToUse });
     const res = await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -213,9 +226,16 @@ export default function Home() {
       setFeedback({ message: data.message || texts?.contactForm.error, isError: true });
     }
   } catch {
-    console.log("🔴 Error inesperado al enviar mensaje.");
     setFeedback({ message: texts?.contactForm.error || 'Something went wrong.', isError: true });
   }
+};
+
+const isValidEmail = (email: string): boolean => {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+};
+
+const isDisposableEmail = (email: string): boolean => {
+  return !isEmailValid(email);
 };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -224,8 +244,28 @@ export default function Home() {
 
     const { name, email, message } = formData;
 
-    if (!name || !email || !message) {
-      setFeedback({ message: texts.contactForm.error, isError: true });
+    if (!name) {
+      setFeedback({ message: texts.contactForm.errorName || 'Name is required.', isError: true, field: 'name' });
+      return;
+    }
+
+    if (!email) {
+      setFeedback({ message: texts.contactForm.errorEmail || 'Email is required.', isError: true, field: 'email' });
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      setFeedback({ message: texts.contactForm.invalidFormat || 'Invalid email format.', isError: true, field: 'email' });
+      return;
+    }
+
+    if (isDisposableEmail(email)) {
+      setFeedback({ message: texts.contactForm.disposableEmail || 'Disposable or blocked email.', isError: true, field: 'email' });
+      return;
+    }
+
+    if (!message) {
+      setFeedback({ message: texts.contactForm.errorMessage || 'Message is required.', isError: true, field: 'message' });
       return;
     }
 
@@ -370,6 +410,9 @@ export default function Home() {
             onChange={handleChange}
             disabled={submitted}
           />
+          {feedback?.isError && feedback.message?.includes('email') && (
+            <Toast message={feedback.message} isError />
+          )}
           <input
             name="email"
             className={contactStyles.input}
@@ -398,9 +441,9 @@ export default function Home() {
           <button type="submit" className={contactStyles.button} disabled={!token || submitted}>{texts.contactForm.send}</button>
         </form>
         {feedback && (
-          <p style={{ color: feedback.isError ? 'red' : 'limegreen' }}>
-            {feedback.message}
-          </p>
+          <div style={{ position: 'relative', width: '100%', height: '0px' }}>
+            <Toast message={feedback.message} isError={feedback.isError} />
+          </div>
         )}
       </section>
       <section className={`${socialStyles.socialSection} ${styles.cardAtributes} ${theme === 'light' ? socialStyles.socialSectionLight : socialStyles.socialSectionDark}`}>

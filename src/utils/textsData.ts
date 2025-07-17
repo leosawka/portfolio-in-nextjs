@@ -82,14 +82,11 @@ export const texts = {
       send: 'Send',
       success: 'Message sent!',
       error: 'Please complete all fields.',
-      errors: {
-        missingFields: 'All fields are required',
-        invalidEmail: 'Invalid email address',
-        captchaMissing: 'Captcha token missing',
-        captchaFail: 'Captcha verification failed',
-        rateLimit: 'Too many requests. Try again later.',
-        telegramFail: 'Failed to send message via Telegram',
-      },
+      "invalidFormat": "Invalid email format.",
+      "disposableEmail": "Disposable or blocked email addresses are not allowed.",
+      "errorName": "Name is required.",
+      "errorEmail": "Email is required.",
+      "errorMessage": "Message is required."
     },
   },
   es: {
@@ -128,21 +125,18 @@ export const texts = {
       { label: 'Telegram', url: 'https://t.me/leonardosawka', icon: '📲' },
     ],
     contactTitle: 'Contáctame',
-    contactForm: {
-      name: 'Nombre',
-      email: 'Correo electrónico',
-      message: 'Mensaje',
-      send: 'Enviar',
-      success: '¡Mensaje enviado!',
-      error: 'Por favor completa todos los campos.',
-      errors: {
-        missingFields: 'Por favor completa todos los campos.',
-        invalidEmail: 'Correo inválido.',
-        captchaMissing: 'Falta verificar el captcha.',
-        captchaFail: 'La verificación del captcha falló.',
-        rateLimit: 'Demasiadas solicitudes. Intenta nuevamente más tarde.',
-        telegramFail: 'No se pudo enviar el mensaje por Telegram.',
-      },
-    },
+    "contactForm": {
+      "name": "Nombre",
+      "email": "Correo electrónico",
+      "message": "Mensaje",
+      "send": "Enviar",
+      "success": "¡Mensaje enviado!",
+      "error": "Por favor completá todos los campos.",
+      "invalidFormat": "Formato de correo inválido.",
+      "disposableEmail": "No se permiten correos temporales o bloqueados.",
+      "errorName": "El nombre es obligatorio.",
+      "errorEmail": "El correo es obligatorio.",
+      "errorMessage": "El mensaje es obligatorio."
+    }
   },
 };

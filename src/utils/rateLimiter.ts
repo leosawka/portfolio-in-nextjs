@@ -1,13 +1,30 @@
-import {LRUCache} from 'lru-cache'
+type RateLimitEntry = {
+  count: number;
+  timestamp: number;
+};
 
-const rateLimiter = new LRUCache <string, number>({
-  max: 500,
-  ttl: 1000 * 60
-})
+const ipStore = new Map<string, RateLimitEntry>();
+const LIMIT = 5;
+const INTERVAL = 60 * 1000;
 
-export const checkRateLimit = (ip: string): boolean => {
-  const count = rateLimiter.get(ip) || 0
-  if (count >= 5) return false
-  rateLimiter.set(ip, count + 1)
-  return true
+export function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const entry = ipStore.get(ip);
+
+  if (!entry) {
+    ipStore.set(ip, { count: 1, timestamp: now });
+    return true;
+  }
+
+  if (now - entry.timestamp > INTERVAL) {
+    ipStore.set(ip, { count: 1, timestamp: now });
+    return true;
+  }
+
+  if (entry.count < LIMIT) {
+    entry.count += 1;
+    return true;
+  }
+
+  return false;
 }
