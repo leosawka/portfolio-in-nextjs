@@ -44,6 +44,20 @@ interface WorkContent {
   tecnologies: string[];
 }
 
+interface TechStack {
+  labels: string[];
+  languages: string[];
+  frontend: string[];
+  backend: string[];
+  databases: string[];
+  devops: string[];
+  testing: string[];
+  ai: string[];
+  tools: string[];
+  softskills: string[];
+  languagesSpoken: string[];
+}
+
 interface WorkHeads {
   from: string;
   to: string;
@@ -67,7 +81,7 @@ interface TextContent {
   workExperienceTitle: string;
   workLabels: WorkHeads;
   workExperience: WorkContent[];
-  stack: string[];
+  stack: TechStack;
   projectsTitle: string;
   projects: Project[];
   socialTitle: string;
@@ -93,8 +107,7 @@ export default function Home() {
   const { theme } = useTheme();
   const [texts, setTexts] = useState<TextContent | null>(null);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [feedback, setFeedback] = useState<{ message: string; isError: boolean;field?: 'name' | 'email' | 'message' | 'general';
-} | null>(null);
+  const [feedback, setFeedback] = useState<{ message: string; isError: boolean;field?: 'name' | 'email' | 'message' | 'general';} | null>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [visibleProjects, setVisibleProjects] = useState<Project[]>([]);
   const [indexOffset, setIndexOffset] = useState(0);
@@ -102,6 +115,8 @@ export default function Home() {
   const [submitted, setSubmitted] = useState(false);
   const carouselRef = useRef<HTMLDivElement | null>(null);
   const hcaptchaRef = useRef<HCaptcha | null>(null);
+
+  type StackCategoryKey = Exclude<keyof TechStack, 'labels'>;
 
   const pendingSubmission = useRef(false);
 
@@ -365,28 +380,55 @@ const isDisposableEmail = (email: string): boolean => {
       </section>
       <section className={`${styles.cardAtributes} ${theme === 'light' ? styles.skillsSectionLight : styles.skillsSectionDark}`}>
         <h2 className={styles.skillsTitle}>{texts.skills}</h2>
-        <div className={styles.badges}>
-          {texts.stack.map((tech) => (
-            <span key={tech} className={styles.badge}>
-              {tech}
-            </span>
-          ))}
-        </div>
+        {texts.stack.labels.map((label, index) => {
+          const categories = Object.keys(texts.stack).filter(key => key !== 'labels') as StackCategoryKey[];
+          const categoryKey = categories[index];
+          const skills = texts.stack[categoryKey];
+          return (
+            <div key={categoryKey} style={{ marginBottom: '1.5rem' }}>
+              <h3 style={{ marginBottom: '0.5rem' }}>{label}</h3>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                {skills.map((tech, i) => {
+                  const bg = techColors[tech] || techColors.default;
+                  const color = ['#f0db4f', '#fcd535', '#ffff99'].includes(bg) ? '#000' : '#fff';
+                  return (
+                    <div
+                      key={i}
+                      style={{
+                        backgroundColor: bg,
+                        color,
+                        padding: '.25rem .75rem',
+                        borderRadius: '10px',
+                        fontSize: '0.9rem',
+                        fontWeight: 600,
+                      }}
+                    >
+                      {tech}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
       </section>
       <section className={`${styles.cardAtributes} ${theme === 'light' ? projectStyles.projectsSectionLight : projectStyles.projectsSectionDark}`}>
         <h2 className={projectStyles.projectsTitle}>{texts.projectsTitle}</h2>
         <div className={projectStyles.projectsGridWrapper}>
+          <div className={`${projectStyles.fadeLeft} ${theme === 'light' ? projectStyles.fadeLeftLight : ''}`} />
+          <div className={`${projectStyles.fadeRight} ${theme === 'light' ? projectStyles.fadeRightLight : ''}`} />
+          
           <button className={`${projectStyles.carouselButton} ${projectStyles.carouselButtonLeft}`} onClick={scrollLeft}>
             ‹
           </button>
           <div
-            className={projectStyles.projectsGrid}
+            className={`${projectStyles.projectsGrid}`}
             ref={carouselRef}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
             {visibleProjects.map((project, index) => (
-              <div key={`${project.title}-${index}`} className={projectStyles.projectCard}>
+              <div key={`${project.title}-${index}`} className={`${projectStyles.projectCard} ${theme === 'light' ? projectStyles.projectCardLight:projectStyles.projectCardDark}`}>
                 <img src={project.image} alt={project.title} className={projectStyles.projectImage} />
                 <div className={projectStyles.projectContent}>
                   <h3>{project.title}</h3>
@@ -405,7 +447,7 @@ const isDisposableEmail = (email: string): boolean => {
       </section>
       <section className={`${styles.cardAtributes} ${theme === 'light' ? contactStyles.contactLight : contactStyles.contactDark}`}>
         <h2 className={contactStyles.contactTitle}>{texts.contactTitle}</h2>
-        <form className={`${contactStyles.form}`} onSubmit={handleSubmit}>
+        <form className={`${contactStyles.form} ${theme === 'light' ? contactStyles.formLight:contactStyles.formDark}`} onSubmit={handleSubmit}>
           <input
             name="name"
             className={contactStyles.input}

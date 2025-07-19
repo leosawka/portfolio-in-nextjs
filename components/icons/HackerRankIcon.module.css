@@ -1,5 +1,5 @@
 .iconLight {
-  fill: #404040;
+  fill: #000;
   filter: drop-shadow(2px 2px 2px #ccc);
   transition: all 0.3s ease;
 }

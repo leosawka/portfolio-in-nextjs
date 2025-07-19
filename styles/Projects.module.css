@@ -31,10 +31,12 @@
 .projectsGrid {
   display: flex;
   gap: 2rem;
+  padding: 1rem;
   overflow-x: scroll;
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  border-radius: 10px;
 }
 
 .projectsGrid::-webkit-scrollbar {
@@ -56,11 +58,11 @@
 }
 
 .carouselButtonLeft {
-  left: 0.5rem;
+  left: 0.8rem;
 }
 
 .carouselButtonRight {
-  right: 0.5rem;
+  right: 0.8rem;
 }
 
 .projectCard {
@@ -68,10 +70,47 @@
   flex: 0 0 auto;
   background-color: #5A5A5A;
   color: var(--text-color);
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
   transition: transform 0.3s;
 }
+
+.projectCardLight {
+  background-color: #CACACA;
+  box-shadow: 8px 8px 4px 1px rgba(155, 155, 155, 0.493);
+}
+
+.projectCardDark {
+  box-shadow: 8px 8px 4px 1px rgba(155, 155, 155, 0.493);
+}
+
+.fadeLeft,
+.fadeRight {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.fadeLeft {
+  left: 0;
+  background: linear-gradient(to right, rgba(245, 245, 245, 1), rgba(245, 245, 245, 0));
+}
+
+.fadeRight {
+  right: 0;
+  background: linear-gradient(to left, rgba(245, 245, 245, 1), rgba(245, 245, 245, 0));
+}
+
+.projectsSectionLight .fadeLeft {
+  background: linear-gradient(to right, rgba(64, 64, 64, 1), rgba(64, 64, 64, 0));
+}
+
+.projectsSectionLight .fadeRight {
+  background: linear-gradient(to left, rgba(64, 64, 64, 1), rgba(64, 64, 64, 0));
+}
+
 
 .projectCard:hover {
   transform: scale(1.02);
