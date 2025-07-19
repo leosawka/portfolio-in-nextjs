@@ -10,6 +10,8 @@ import { GithubIcon } from '../components/icons/GithubIcon';
 import { GmailIcon } from '../components/icons/GmailIcon';
 import { LinkedinIcon } from '../components/icons/LinkedinIcon';
 import { TelegramIcon } from '../components/icons/TelegramIcon';
+import { HackerRankIcon } from '../components/icons/HackerRankIcon';
+import { PlatziIcon } from '../components/icons/PlatziIcon';
 import { isEmailValid } from '../src/utils/validateEmail';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import techColors from '../src/utils/techColors';
@@ -22,6 +24,8 @@ const iconMap: Record<string, FC<{ theme: 'light' | 'dark'; size?: number }>> = 
   Gmail: GmailIcon,
   Linkedin: LinkedinIcon,
   Telegram: TelegramIcon,
+  HackerRank: HackerRankIcon,
+  Platzi: PlatziIcon
 };
 
 interface SocialItem {
