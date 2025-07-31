@@ -9,10 +9,8 @@ import { isEmailValid } from '../src/utils/validateEmail';
 import { GmailIcon } from '../components/icons/GmailIcon';
 import WorkExperience from '../components/WorkExperience';
 import { blendColors } from '../src/utils/blendColors';
-import socialStyles from '../styles/Social.module.css';
 import { useTheme } from '../contexts/ThemeContext';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
-import styles from '../styles/Home.module.css';
 import Projects from '../components/Projects';
 import Contact from '../components/Contact';
 import Skills from '../components/Skills';
@@ -117,7 +115,6 @@ export default function Home() {
 
   const pendingSubmission = useRef(false);
 
-  const scrollBy = 300;
   const sitekey = process.env.NEXT_PUBLIC_HCAPTCHA_SITEKEY!;
 
 
