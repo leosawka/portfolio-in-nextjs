@@ -1,20 +1,21 @@
 import { useRef, useEffect, useState, FormEvent, ChangeEvent } from 'react';
-import { useTheme } from '../contexts/ThemeContext';
-import { useLanguage } from '../contexts/LanguageContext';
-import { blendColors } from '../src/utils/blendColors';
-import styles from '../styles/Home.module.css';
-import socialStyles from '../styles/Social.module.css';
-import projectStyles from '../styles/Projects.module.css';
-import contactStyles from '../styles/Contact.module.css';
-import { GithubIcon } from '../components/icons/GithubIcon';
-import { GmailIcon } from '../components/icons/GmailIcon';
+import { HackerRankIcon } from '../components/icons/HackerRankIcon';
 import { LinkedinIcon } from '../components/icons/LinkedinIcon';
 import { TelegramIcon } from '../components/icons/TelegramIcon';
-import { HackerRankIcon } from '../components/icons/HackerRankIcon';
+import { GithubIcon } from '../components/icons/GithubIcon';
 import { PlatziIcon } from '../components/icons/PlatziIcon';
+import { useLanguage } from '../contexts/LanguageContext';
 import { isEmailValid } from '../src/utils/validateEmail';
-import HCaptcha from '@hcaptcha/react-hcaptcha';
+import { GmailIcon } from '../components/icons/GmailIcon';
+import projectStyles from '../styles/Projects.module.css';
+import contactStyles from '../styles/Contact.module.css';
+import { blendColors } from '../src/utils/blendColors';
+import socialStyles from '../styles/Social.module.css';
+import { useTheme } from '../contexts/ThemeContext';
 import techColors from '../src/utils/techColors';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
+import styles from '../styles/Home.module.css';
+import About from '../components/About';
 
 import { FC } from 'react';
 import Toast from '../components/Toast';
@@ -328,15 +329,7 @@ const isDisposableEmail = (email: string): boolean => {
 
   return (
     <>
-      <section className={`${styles.aboutSection} ${styles.cardAtributes} ${theme === 'light' ? styles.aboutLight : styles.aboutDark}`}>
-        <img className={`${theme === 'light' ? styles.aboutSectionCardImgLight : styles.aboutSectionCardImgDark}`} src={'https://media.licdn.com/dms/image/v2/D4D03AQHZT1Nq5ncR5Q/profile-displayphoto-shrink_800_800/B4DZOceIYUHgAc-/0/1733496965288?e=1757548800&v=beta&t=ntug2Y_Vfocs_FcRNV1-Z0X9-y6vkeWfNYACXLlvSPo'}
-          alt='profile image'
-        />
-        <div>
-          <h1 className={styles.aboutTitle}>{texts.greeting}</h1>
-          <p className={styles.aboutText}>{texts.about}</p>
-        </div>
-      </section>
+      <About greeting={texts.greeting} about={texts.about} />
       <section className={`${styles.cardAtributes} ${theme === 'light' ? styles.skillsSectionLight : styles.skillsSectionDark}`}>
         <h2 className={styles.skillsTitle}>{texts.workExperienceTitle}</h2>
         <div className={styles.experienceCard}>
