@@ -8,6 +8,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { isEmailValid } from '../src/utils/validateEmail';
 import { GmailIcon } from '../components/icons/GmailIcon';
 import projectStyles from '../styles/Projects.module.css';
+import WorkExperience from '../components/WorkExperience';
 import contactStyles from '../styles/Contact.module.css';
 import { blendColors } from '../src/utils/blendColors';
 import socialStyles from '../styles/Social.module.css';
@@ -330,47 +331,7 @@ const isDisposableEmail = (email: string): boolean => {
   return (
     <>
       <About greeting={texts.greeting} about={texts.about} />
-      <section className={`${styles.cardAtributes} ${theme === 'light' ? styles.skillsSectionLight : styles.skillsSectionDark}`}>
-        <h2 className={styles.skillsTitle}>{texts.workExperienceTitle}</h2>
-        <div className={styles.experienceCard}>
-          {texts.workExperience.map((exp, id) => (
-            <div key={id} className={`${styles.experienceCardElement} ${theme === 'light' ? styles.experienceCardLight : styles.experienceCardDark}`} style={{ whiteSpace: 'pre-line' }}>
-              {texts.workLabels.from} {exp.from} {texts.workLabels.to} {exp.to} <br />
-              <div>
-                <strong>{texts.workLabels.company}:</strong> {exp.company} — <strong>{texts.workLabels.position}:</strong> {exp.jobtitle}
-              </div>
-              <strong>{texts.workLabels.highlights}:</strong>
-              {exp.highlights.map((highlight) => `• ${highlight}`).join('\n')}
-              <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', marginTop: '1rem' }}>
-                <div style={{ marginTop: '1rem' }}>
-                  <strong>{texts.workLabels.technologies}:</strong>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.5rem' }}>
-                    {exp.tecnologies.map((tech, i) => {
-                      const bg = techColors[tech] || techColors.default;
-                      const color = ['#f0db4f', '#fcd535', '#ffff99'].includes(bg) ? '#000' : '#fff';
-                      return (
-                        <div
-                          key={i}
-                          style={{
-                            backgroundColor: bg,
-                            color,
-                            padding: '.25rem .75rem',
-                            borderRadius: '10px',
-                            fontSize: '0.9rem',
-                            fontWeight: 600,
-                          }}
-                        >
-                          {tech}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <WorkExperience title={texts.workExperienceTitle} workLabels={texts.workLabels} workExperience={texts.workExperience}/>
       <section className={`${styles.cardAtributes} ${theme === 'light' ? styles.skillsSectionLight : styles.skillsSectionDark}`}>
         <h2 className={styles.skillsTitle}>{texts.skills}</h2>
         {texts.stack.labels.map((label, index) => {
