@@ -8,17 +8,16 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { isEmailValid } from '../src/utils/validateEmail';
 import { GmailIcon } from '../components/icons/GmailIcon';
 import WorkExperience from '../components/WorkExperience';
-import contactStyles from '../styles/Contact.module.css';
 import { blendColors } from '../src/utils/blendColors';
 import socialStyles from '../styles/Social.module.css';
 import { useTheme } from '../contexts/ThemeContext';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import styles from '../styles/Home.module.css';
 import Projects from '../components/Projects';
+import Contact from '../components/Contact';
 import Skills from '../components/Skills';
 import About from '../components/About';
 import { FC } from 'react';
-import Toast from '../components/Toast';
 
 const iconMap: Record<string, FC<{ theme: 'light' | 'dark'; size?: number }>> = {
   Github: GithubIcon,
@@ -333,53 +332,18 @@ const isDisposableEmail = (email: string): boolean => {
       <WorkExperience title={texts.workExperienceTitle} workLabels={texts.workLabels} workExperience={texts.workExperience}/>
       <Skills title={texts.skills} stack={texts.stack} />
       <Projects title={texts.projectsTitle} projects={texts.projects} />
-      <section className={`${styles.cardAtributes} ${theme === 'light' ? contactStyles.contactLight : contactStyles.contactDark}`}>
-        <h2 className={contactStyles.contactTitle}>{texts.contactTitle}</h2>
-        <form className={`${contactStyles.form} ${theme === 'light' ? contactStyles.formLight:contactStyles.formDark}`} onSubmit={handleSubmit}>
-          <input
-            name="name"
-            className={contactStyles.input}
-            placeholder={texts.contactForm.name}
-            value={formData.name}
-            onChange={handleChange}
-            disabled={submitted}
-          />
-          {feedback?.isError && feedback.message?.includes('email') && (
-            <Toast message={feedback.message} isError />
-          )}
-          <input
-            name="email"
-            className={contactStyles.input}
-            placeholder={texts.contactForm.email}
-            value={formData.email}
-            onChange={handleChange}
-            disabled={submitted}
-          />
-          <textarea
-            name="message"
-            className={contactStyles.textarea}
-            placeholder={texts.contactForm.message}
-            rows={5}
-            value={formData.message}
-            onChange={handleChange}
-            disabled={submitted}
-          />
-          <div className={contactStyles.captchaWrapper}>
-            <HCaptcha
-              sitekey={sitekey}
-              size='normal'
-              onVerify={handleCaptchaVerify}
-              ref={hcaptchaRef}
-            />
-          </div>
-          <button type="submit" className={contactStyles.button} disabled={!token || submitted}>{texts.contactForm.send}</button>
-        </form>
-        {feedback && (
-          <div style={{ position: 'relative', width: '100%', height: '0px' }}>
-            <Toast message={feedback.message} isError={feedback.isError} />
-          </div>
-        )}
-      </section>
+      <Contact
+        contactTitle={texts.contactTitle}
+        contactForm={texts.contactForm}
+        formData={formData}
+        submitted={submitted}
+        token={token}
+        feedback={feedback}
+        hcaptchaRef={hcaptchaRef}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+        onVerify={handleCaptchaVerify}
+      />
       <section className={`${socialStyles.socialSection} ${styles.cardAtributes} ${theme === 'light' ? socialStyles.socialSectionLight : socialStyles.socialSectionDark}`}>
         <h2 className={socialStyles.socialTitle}>{texts.socialTitle}</h2>
         <div className={socialStyles.socialLinks}>
