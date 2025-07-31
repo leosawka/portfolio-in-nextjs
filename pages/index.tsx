@@ -109,12 +109,8 @@ export default function Home() {
   const [texts, setTexts] = useState<TextContent | null>(null);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [feedback, setFeedback] = useState<{ message: string; isError: boolean;field?: 'name' | 'email' | 'message' | 'general';} | null>(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const [visibleProjects, setVisibleProjects] = useState<Project[]>([]);
-  const [indexOffset, setIndexOffset] = useState(0);
   const [token, setToken] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
-  const carouselRef = useRef<HTMLDivElement | null>(null);
   const hcaptchaRef = useRef<HCaptcha | null>(null);
 
   type StackCategoryKey = Exclude<keyof TechStack, 'labels'>;
@@ -125,77 +121,12 @@ export default function Home() {
   const sitekey = process.env.NEXT_PUBLIC_HCAPTCHA_SITEKEY!;
 
 
-  const scrollLeft = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: -scrollBy, behavior: 'smooth' });
-    }
-  };
-
-  const scrollRight = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: scrollBy, behavior: 'smooth' });
-    }
-  };
-
   useEffect(() => {
     if (!feedback) return;
     const timeout = setTimeout(() => setFeedback(null), 3500);
     return () => clearTimeout(timeout);
   }, [feedback]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (carouselRef.current && !isHovered) {
-        carouselRef.current.scrollBy({ left: scrollBy, behavior: 'smooth' });
-      }
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [isHovered]);
-
-  useEffect(() => {
-    if (!texts) return;
-    const repeated = [...texts.projects, ...texts.projects, ...texts.projects];
-    setVisibleProjects(repeated);
-    setIndexOffset(texts.projects.length);
-
-    requestAnimationFrame(() => {
-      if (carouselRef.current) {
-        carouselRef.current.scrollLeft = texts.projects.length * (300 + 32);
-      }
-    });
-  }, [texts]);
-
-  useEffect(() => {
-    const el = carouselRef.current;
-    if (!el || !texts) return;
-
-    const handleScroll = () => {
-      const cardWidth = 300 + 32;
-      const leftThreshold = cardWidth;
-      const rightThreshold = el.scrollWidth - el.clientWidth - cardWidth;
-
-      if (el.scrollLeft < leftThreshold) {
-        setVisibleProjects(prev => {
-          const newProjects = [...texts.projects, ...prev];
-          setIndexOffset(offset => offset + texts.projects.length);
-          requestAnimationFrame(() => {
-            if (carouselRef.current) {
-              carouselRef.current.scrollLeft += texts.projects.length * cardWidth;
-            }
-          });
-          return newProjects;
-        });
-      } else if (el.scrollLeft > rightThreshold) {
-        setVisibleProjects(prev => {
-          const newProjects = [...prev, ...texts.projects];
-          return newProjects;
-        });
-      }
-    };
-
-    el.addEventListener('scroll', handleScroll);
-    return () => el.removeEventListener('scroll', handleScroll);
-  }, [texts]);
 
   useEffect(() => {
     const handleScroll = () => {
