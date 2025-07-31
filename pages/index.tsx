@@ -1,18 +1,16 @@
 import type { TextContent, Project, TechStack, WorkContent, WorkHeads, SocialItem, IconMap } from '../types/index';
 import { useRef, useEffect, useState, FormEvent, ChangeEvent } from 'react';
 import { HackerRankIcon } from '../components/icons/HackerRankIcon';
+import { useBackgroundBlend } from '../hooks/useBackgroundBlend';
 import { LinkedinIcon } from '../components/icons/LinkedinIcon';
 import { TelegramIcon } from '../components/icons/TelegramIcon';
 import { GithubIcon } from '../components/icons/GithubIcon';
 import { PlatziIcon } from '../components/icons/PlatziIcon';
 import { useLanguage } from '../contexts/LanguageContext';
-import { isEmailValid } from '../src/utils/validateEmail';
 import { GmailIcon } from '../components/icons/GmailIcon';
 import WorkExperience from '../components/WorkExperience';
 import { useContactForm } from '../hooks/useContactForm';
-import { blendColors } from '../src/utils/blendColors';
 import { useTheme } from '../contexts/ThemeContext';
-import HCaptcha from '@hcaptcha/react-hcaptcha';
 import Projects from '../components/Projects';
 import Contact from '../components/Contact';
 import Skills from '../components/Skills';
@@ -46,30 +44,7 @@ export default function Home() {
     handleCaptchaVerify
   } = useContactForm(texts);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = Math.min(scrollTop / docHeight, 1);
-
-      const lightStart = '#ffffff';
-      const lightEnd = '#d0eaff';
-      const darkStart = '#111111';
-      const darkEnd = '#222244';
-
-      const blended = blendColors(
-        theme === 'light' ? lightStart : darkStart,
-        theme === 'light' ? lightEnd : darkEnd,
-        scrollPercent
-      );
-
-      document.body.style.backgroundColor = blended;
-    };
-
-    handleScroll();
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [theme]);
+  useBackgroundBlend(theme);
 
   useEffect(() => {
     fetch(`/api/texts?lang=${language}`)
