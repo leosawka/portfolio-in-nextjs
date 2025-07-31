@@ -16,6 +16,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import techColors from '../src/utils/techColors';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import styles from '../styles/Home.module.css';
+import Skills from '../components/Skills';
 import About from '../components/About';
 
 import { FC } from 'react';
@@ -332,40 +333,7 @@ const isDisposableEmail = (email: string): boolean => {
     <>
       <About greeting={texts.greeting} about={texts.about} />
       <WorkExperience title={texts.workExperienceTitle} workLabels={texts.workLabels} workExperience={texts.workExperience}/>
-      <section className={`${styles.cardAtributes} ${theme === 'light' ? styles.skillsSectionLight : styles.skillsSectionDark}`}>
-        <h2 className={styles.skillsTitle}>{texts.skills}</h2>
-        {texts.stack.labels.map((label, index) => {
-          const categories = Object.keys(texts.stack).filter(key => key !== 'labels') as StackCategoryKey[];
-          const categoryKey = categories[index];
-          const skills = texts.stack[categoryKey];
-          return (
-            <div key={categoryKey} style={{ marginBottom: '1.5rem' }}>
-              <h3 style={{ marginBottom: '0.5rem' }}>{label}</h3>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                {skills.map((tech, i) => {
-                  const bg = techColors[tech] || techColors.default;
-                  const color = ['#f0db4f', '#fcd535', '#ffff99'].includes(bg) ? '#000' : '#fff';
-                  return (
-                    <div
-                      key={i}
-                      style={{
-                        backgroundColor: bg,
-                        color,
-                        padding: '.25rem .75rem',
-                        borderRadius: '10px',
-                        fontSize: '0.9rem',
-                        fontWeight: 600,
-                      }}
-                    >
-                      {tech}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          );
-        })}
-      </section>
+      <Skills title={texts.skills} stack={texts.stack} />
       <section className={`${styles.cardAtributes} ${theme === 'light' ? projectStyles.projectsSectionLight : projectStyles.projectsSectionDark}`}>
         <h2 className={projectStyles.projectsTitle}>{texts.projectsTitle}</h2>
         <div className={projectStyles.projectsGridWrapper}>
