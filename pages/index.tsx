@@ -7,18 +7,16 @@ import { PlatziIcon } from '../components/icons/PlatziIcon';
 import { useLanguage } from '../contexts/LanguageContext';
 import { isEmailValid } from '../src/utils/validateEmail';
 import { GmailIcon } from '../components/icons/GmailIcon';
-import projectStyles from '../styles/Projects.module.css';
 import WorkExperience from '../components/WorkExperience';
 import contactStyles from '../styles/Contact.module.css';
 import { blendColors } from '../src/utils/blendColors';
 import socialStyles from '../styles/Social.module.css';
 import { useTheme } from '../contexts/ThemeContext';
-import techColors from '../src/utils/techColors';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import styles from '../styles/Home.module.css';
+import Projects from '../components/Projects';
 import Skills from '../components/Skills';
 import About from '../components/About';
-
 import { FC } from 'react';
 import Toast from '../components/Toast';
 
@@ -334,39 +332,7 @@ const isDisposableEmail = (email: string): boolean => {
       <About greeting={texts.greeting} about={texts.about} />
       <WorkExperience title={texts.workExperienceTitle} workLabels={texts.workLabels} workExperience={texts.workExperience}/>
       <Skills title={texts.skills} stack={texts.stack} />
-      <section className={`${styles.cardAtributes} ${theme === 'light' ? projectStyles.projectsSectionLight : projectStyles.projectsSectionDark}`}>
-        <h2 className={projectStyles.projectsTitle}>{texts.projectsTitle}</h2>
-        <div className={projectStyles.projectsGridWrapper}>
-          <div className={`${projectStyles.fadeLeft} ${theme === 'light' ? projectStyles.fadeLeftLight : ''}`} />
-          <div className={`${projectStyles.fadeRight} ${theme === 'light' ? projectStyles.fadeRightLight : ''}`} />
-          
-          <button className={`${projectStyles.carouselButton} ${projectStyles.carouselButtonLeft}`} onClick={scrollLeft}>
-            ‹
-          </button>
-          <div
-            className={`${projectStyles.projectsGrid}`}
-            ref={carouselRef}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            {visibleProjects.map((project, index) => (
-              <div key={`${project.title}-${index}`} className={`${projectStyles.projectCard} ${theme === 'light' ? projectStyles.projectCardLight:projectStyles.projectCardDark}`}>
-                <img src={project.image} alt={project.title} className={projectStyles.projectImage} />
-                <div className={projectStyles.projectContent}>
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
-                  <a href={project.link} target="_blank" rel="noopener noreferrer">
-                    View Project →
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-          <button className={`${projectStyles.carouselButton} ${projectStyles.carouselButtonRight}`} onClick={scrollRight}>
-            ›
-          </button>
-        </div>
-      </section>
+      <Projects title={texts.projectsTitle} projects={texts.projects} />
       <section className={`${styles.cardAtributes} ${theme === 'light' ? contactStyles.contactLight : contactStyles.contactDark}`}>
         <h2 className={contactStyles.contactTitle}>{texts.contactTitle}</h2>
         <form className={`${contactStyles.form} ${theme === 'light' ? contactStyles.formLight:contactStyles.formDark}`} onSubmit={handleSubmit}>
