@@ -16,6 +16,7 @@ import styles from '../styles/Home.module.css';
 import Projects from '../components/Projects';
 import Contact from '../components/Contact';
 import Skills from '../components/Skills';
+import Social from '../components/Social';
 import About from '../components/About';
 import { FC } from 'react';
 
@@ -344,30 +345,7 @@ const isDisposableEmail = (email: string): boolean => {
         onSubmit={handleSubmit}
         onVerify={handleCaptchaVerify}
       />
-      <section className={`${socialStyles.socialSection} ${styles.cardAtributes} ${theme === 'light' ? socialStyles.socialSectionLight : socialStyles.socialSectionDark}`}>
-        <h2 className={socialStyles.socialTitle}>{texts.socialTitle}</h2>
-        <div className={socialStyles.socialLinks}>
-          {texts.social.map((item) => {
-            const IconComponent = iconMap[item.label];
-            return (
-              <a
-                key={item.label}
-                href={item.url}
-                className={`${socialStyles.socialLink} ${theme === 'light' ? socialStyles.socialLinkLight : socialStyles.socialLinkDark}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div
-                  className={`${socialStyles.iconWrapper} ${theme === 'light' ? socialStyles.light : socialStyles.dark}`}
-                >
-                  {IconComponent && <IconComponent theme={theme} size={24} />}
-                </div>
-                <span>{item.label}</span>
-              </a>
-            );
-          })}
-        </div>
-      </section>
+      <Social title={texts.socialTitle} items={texts.social} iconMap={iconMap} />
     </>
   );
 }
