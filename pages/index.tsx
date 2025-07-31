@@ -1,3 +1,4 @@
+import type { TextContent, Project, TechStack, WorkContent, WorkHeads, SocialItem, IconMap } from '../types/index';
 import { useRef, useEffect, useState, FormEvent, ChangeEvent } from 'react';
 import { HackerRankIcon } from '../components/icons/HackerRankIcon';
 import { LinkedinIcon } from '../components/icons/LinkedinIcon';
@@ -16,9 +17,8 @@ import Contact from '../components/Contact';
 import Skills from '../components/Skills';
 import Social from '../components/Social';
 import About from '../components/About';
-import { FC } from 'react';
 
-const iconMap: Record<string, FC<{ theme: 'light' | 'dark'; size?: number }>> = {
+const iconMap: IconMap = {
   Github: GithubIcon,
   Gmail: GmailIcon,
   Linkedin: LinkedinIcon,
@@ -27,79 +27,6 @@ const iconMap: Record<string, FC<{ theme: 'light' | 'dark'; size?: number }>> = 
   Platzi: PlatziIcon
 };
 
-interface SocialItem {
-  label: string;
-  url: string;
-  icon: string;
-}
-
-interface WorkContent {
-  iconImage: string;
-  from: string;
-  to: string;
-  jobtitle: string;
-  company: string;
-  highlights: string[];
-  tecnologies: string[];
-}
-
-interface TechStack {
-  labels: string[];
-  languages: string[];
-  frontend: string[];
-  backend: string[];
-  databases: string[];
-  devops: string[];
-  testing: string[];
-  ai: string[];
-  tools: string[];
-  softskills: string[];
-  languagesSpoken: string[];
-}
-
-interface WorkHeads {
-  from: string;
-  to: string;
-  position: string;
-  company: string;
-  highlights: string;
-  technologies: string;
-}
-
-interface Project {
-  title: string;
-  description: string;
-  image: string;
-  link: string;
-}
-
-interface TextContent {
-  greeting: string;
-  about: string;
-  skills: string;
-  workExperienceTitle: string;
-  workLabels: WorkHeads;
-  workExperience: WorkContent[];
-  stack: TechStack;
-  projectsTitle: string;
-  projects: Project[];
-  socialTitle: string;
-  social: SocialItem[];
-  contactTitle: string;
-  contactForm: {
-    name: string;
-    email: string;
-    message: string;
-    send: string;
-    success: string;
-    error: string;
-    invalidFormat: string;
-    disposableEmail: string;
-    errorName: string;
-    errorEmail: string;
-    errorMessage: string;
-  };
-}
 
 export default function Home() {
   const { language } = useLanguage();
@@ -110,8 +37,6 @@ export default function Home() {
   const [token, setToken] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const hcaptchaRef = useRef<HCaptcha | null>(null);
-
-  type StackCategoryKey = Exclude<keyof TechStack, 'labels'>;
 
   const pendingSubmission = useRef(false);
 
