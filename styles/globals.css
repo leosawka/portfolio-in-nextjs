@@ -10,13 +10,19 @@ html, body {
 }
 
 :root[data-theme='light'] {
-  --bg-color: #ffffff;
+  --bg-color: #d0eaff;
   --text-color: #000000;
+  --card-bg-color: #2b2b2b;
+  --card-text-color: #f5f5f5;
 }
 
 :root[data-theme='dark'] {
-  --bg-color: #111111;
-  --text-color: #ffffff;
+  --bg-color: #1a1a1a;
+  --text-color: #e6f0ff;
+  --card-bg-color: #f5f5f5;
+  --card-text-color: #000;
+  --contrast-bg: #2a2a2a;
+  --contrast-text: #ffffff;
 }
 
 body {

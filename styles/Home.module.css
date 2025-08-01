@@ -12,15 +12,17 @@
 }
 
 .aboutLight {
-  background-color: #404040;
-  color: #fff;
+  background-color: var(--card-bg-color);
+  color: var(--card-text-color);
   box-shadow: 8px 8px 4px 1px rgba(14, 18, 49, 0.493);
+  margin-top: 6rem;
 }
 
 .aboutDark {
-  background-color: #f5f5f5;
-  color: #000;
+  background-color: var(--card-bg-color);
+  color: var(--card-text-color);
   box-shadow: 8px 8px 4px 1px rgba(155, 155, 155, 0.493);
+  margin-top: 6rem;
 }
 
 .aboutSectionCard:hover {
@@ -82,14 +84,14 @@
 }
 
 .experienceCardLight {
-  background-color: #000;
-  color: #fff;
-  box-shadow: 8px 8px 4px 1px rgba(14, 18, 49, 0.493);
+  background-color: var(--bg-blend-inverted);
+  color: var(--text-color);
+  box-shadow: 8px 8px 4px 1px rgba(155, 155, 155, 0.493);
 }
 
 .experienceCardDark {
-  background-color: #404040;
-  color: #fff;
+  background-color: var(--bg-blend-inverted);
+  color: var(--contrast-text);
   box-shadow: 8px 8px 4px 1px rgba(155, 155, 155, 0.493);
 }
 
@@ -126,14 +128,14 @@
 }
 
 .skillsSectionLight {
-  background-color: #404040;
-  color: #fff;
+  background-color: var(--card-bg-color);
+  color: var(--card-text-color);
   box-shadow: 8px 8px 4px 1px rgba(14, 18, 49, 0.493);
 }
 
 .skillsSectionDark {
-  background-color: #f5f5f5;
-  color: #000;
+  background-color: var(--card-bg-color);
+  color: var(--card-text-color);
   box-shadow: 8px 8px 4px 1px rgba(155, 155, 155, 0.493);
 }
 
@@ -149,8 +151,8 @@
 }
 
 .badge {
-  background-color: var(--text-color);
-  color: var(--bg-color);
+  background-color: var(--contrast-bg);
+  color: var(--contrast-text);
   padding: 0.5rem 1rem;
   border-radius: 20px;
   font-size: 0.9rem;

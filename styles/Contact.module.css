@@ -9,8 +9,8 @@
 }
 
 .contactLight {
-  background-color: #404040;
-  color: #fff;
+  background-color: #2b2b2b;
+  color: #d0eaff;
   box-shadow: 8px 8px 4px 1px rgba(14, 18, 49, 0.493);
 }
 
@@ -32,14 +32,14 @@
 }
 
 .formLight {
-  background-color: #f5f5f5;
+  background-color: var(--bg-blend-inverted);
   color: #000;
   box-shadow: 8px 8px 4px 1px rgba(14, 18, 49, 0.493);
 }
 
 .formDark {
-  background-color: #404040;
-  color: #fff;
+  background-color: var(--bg-blend-inverted);
+  color: #d0eaff;
   box-shadow: 8px 8px 4px 1px rgba(155, 155, 155, 0.493);
 }
 
@@ -56,8 +56,16 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 1rem;
-  background-color: var(--bg-color);
+  background-color: var(--bg-blend);
   color: var(--text-color);
+}
+
+.input:-webkit-autofill,
+.textarea:-webkit-autofill {
+  background-color: var(--bg-blend);
+  -webkit-box-shadow: 0 0 0 1000px var(--bg-blend) inset;
+  -webkit-text-fill-color: var(--text-color);
+  transition: background-color 0s ease-in-out 0s;
 }
 
 .button {
@@ -77,7 +85,7 @@
 .button:hover {
   background-color: #4b519c73;
   border-color: #000;
-  color: #fff;
+  color: #d0eaff;
   letter-spacing: .35rem;
   transition: .75s cubic-bezier(0, 0, 1, 1);
 }
@@ -105,7 +113,7 @@
 .button:disabled::after {
   background-color: #4b519c73;
   border-color: #000;
-  color: #fff;
+  color: #d0eaff;
   letter-spacing: .35rem;
   transition: .75s cubic-bezier(0, 0, 1, 1);
 }
@@ -120,7 +128,7 @@
 
 .button:disabled {
   background-color: #999;
-  color: #fff;
+  color: #d0eaff;
   cursor: not-allowed;
   opacity: 0.7;
   border: none;

@@ -6,8 +6,8 @@
 }
 
 .projectsSectionLight {
-  background-color: #404040;
-  color: #fff;
+  background-color: #2b2b2b;
+  color: #d0eaff;
   box-shadow: 8px 8px 4px 1px rgba(14, 18, 49, 0.493);
 }
 
@@ -47,7 +47,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.7);
   border: none;
   color: white;
   font-size: 1.5rem;
@@ -68,7 +68,6 @@
 .projectCard {
   min-width: 300px;
   flex: 0 0 auto;
-  background-color: #5A5A5A;
   color: var(--text-color);
   border-radius: 10px;
   transition: transform 0.3s;
@@ -80,6 +79,7 @@
 }
 
 .projectCardDark {
+  background-color: #333344;
   box-shadow: 8px 8px 4px 1px rgba(155, 155, 155, 0.493);
 }
 

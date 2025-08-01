@@ -6,6 +6,6 @@
 
 .iconDark {
   fill: #fff;
-  filter: drop-shadow(2px 2px 2px #404040);
+  filter: drop-shadow(2px 2px 2px #1a1a1a);
   transition: all 0.3s ease;
 }

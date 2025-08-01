@@ -13,13 +13,17 @@ export function useBackgroundBlend(theme: 'light' | 'dark') {
       const darkStart = '#111111';
       const darkEnd = '#222244';
 
-      const blended = blendColors(
-        theme === 'light' ? lightStart : darkStart,
-        theme === 'light' ? lightEnd : darkEnd,
-        scrollPercent
-      );
+      const [start, end] = theme === 'light'
+        ? [lightStart, lightEnd]
+        : [darkStart, darkEnd];
+
+      const blended = blendColors(start, end, scrollPercent);
+      const invertedBlended = blendColors(start, end, 1 -scrollPercent);
 
       document.body.style.backgroundColor = blended;
+
+      document.documentElement.style.setProperty('--bg-blend', blended);
+      document.documentElement.style.setProperty('--bg-blend-inverted', invertedBlended);
     };
 
     handleScroll();
