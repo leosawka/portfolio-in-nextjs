@@ -26,8 +26,13 @@ export function useBackgroundBlend(theme: 'light' | 'dark') {
       document.documentElement.style.setProperty('--bg-blend-inverted', invertedBlended);
     };
 
-    handleScroll();
+    requestAnimationFrame(() => {
+      requestIdleCallback(() => {
+        handleScroll();
+      });
+    });
     window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [theme]);
 }
