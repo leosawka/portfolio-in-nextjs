@@ -12,6 +12,7 @@ import WorkExperience from '../components/WorkExperience';
 import { useContactForm } from '../hooks/useContactForm';
 import { useTheme } from '../contexts/ThemeContext';
 import Projects from '../components/Projects';
+import Loading from '../components/Loading';
 import Contact from '../components/Contact';
 import Skills from '../components/Skills';
 import Social from '../components/Social';
@@ -52,7 +53,7 @@ export default function Home() {
       .then(setTexts);
   }, [language]);
 
-  if (!texts) return <p>Loading...</p>;
+  if (!texts) return <Loading />;
 
   return (
     <>
