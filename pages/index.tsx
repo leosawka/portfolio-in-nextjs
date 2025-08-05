@@ -33,6 +33,7 @@ export default function Home() {
   const { theme } = useTheme();
   const [texts, setTexts] = useState<TextContent | null>(null);
   const sitekey = process.env.NEXT_PUBLIC_HCAPTCHA_SITEKEY!;
+  const isReady = useBackgroundBlend(theme);
 
   const {
     formData,
@@ -45,15 +46,13 @@ export default function Home() {
     handleCaptchaVerify
   } = useContactForm(texts);
 
-  useBackgroundBlend(theme);
-
   useEffect(() => {
     fetch(`/api/texts?lang=${language}`)
       .then((res) => res.json())
       .then(setTexts);
   }, [language]);
 
-  if (!texts) return <Loading />;
+  if (!isReady || !texts) return <Loading />;
 
   return (
     <>

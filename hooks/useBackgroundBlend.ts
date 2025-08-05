@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { blendColors } from '../src/utils/blendColors';
 
 export function useBackgroundBlend(theme: 'light' | 'dark') {
+  const [isReady, setIsReady] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
@@ -26,13 +27,13 @@ export function useBackgroundBlend(theme: 'light' | 'dark') {
       document.documentElement.style.setProperty('--bg-blend-inverted', invertedBlended);
     };
 
-    requestAnimationFrame(() => {
-      requestIdleCallback(() => {
-        handleScroll();
-      });
-    });
+    handleScroll();
+    setIsReady(true);
+
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [theme]);
+
+  return isReady;
 }
