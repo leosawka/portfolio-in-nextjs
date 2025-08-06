@@ -14,6 +14,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import Projects from '../components/Projects';
 import Loading from '../components/Loading';
 import Contact from '../components/Contact';
+import Courses from '../components/Courses';
 import Skills from '../components/Skills';
 import Social from '../components/Social';
 import About from '../components/About';
@@ -60,6 +61,12 @@ export default function Home() {
       <WorkExperience title={texts.workExperienceTitle} workLabels={texts.workLabels} workExperience={texts.workExperience}/>
       <Skills title={texts.skills} stack={texts.stack} />
       <Projects title={texts.projectsTitle} projects={texts.projects} />
+      <Courses
+        title={texts.coursesTitle}
+        courses={texts.courses}
+        viewMore={texts.viewMore}
+        viewLess={texts.viewLess}
+      />
       <Contact
         contactTitle={texts.contactTitle}
         contactForm={texts.contactForm}

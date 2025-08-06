@@ -47,6 +47,7 @@ export interface Project {
 }
 
 export interface TextContent {
+  labels: any;
   greeting: string;
   about: string;
   skills: string;
@@ -72,6 +73,21 @@ export interface TextContent {
     errorEmail: string;
     errorMessage: string;
   };
+  coursesTitle: string;
+  courses: Course[];
+  viewMore: string;
+  viewLess: string;
 }
+
+export interface Course {
+  title: string;
+  viewMore: string;
+  viewLess: string;
+  description: string;
+  date: string;
+  certificateId: string;
+  logo: string;
+}
+
 
 export type IconMap = Record<string, FC<{ theme: 'light' | 'dark'; size?: number }>>;
