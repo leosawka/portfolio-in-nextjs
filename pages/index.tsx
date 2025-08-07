@@ -53,7 +53,7 @@ export default function Home() {
       .then(setTexts);
   }, [language]);
 
-  if (!isReady || !texts) return <Loading />;
+  if (!texts) return <Loading />;
 
   return (
     <>
