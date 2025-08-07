@@ -90,7 +90,7 @@ export const texts = {
     ],
     coursesTitle: 'Courses',
     viewMore: 'Show More ▼',
-    vewLess: 'Show Less ▲',
+    viewLess: 'Show Less ▲',
     courses: [
       {
         title: 'Introduction to machine learning',
@@ -440,7 +440,7 @@ export const texts = {
     ],
     coursesTitle: 'Cursos realizados',
     viewMore: 'Ver más ▼',
-    vewLess: 'Ver menos ▲',
+    viewLess: 'Ver menos ▲',
     courses: [
       {
         title: 'Introducción al aprendizaje automático',

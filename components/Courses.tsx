@@ -21,7 +21,7 @@ export default function Courses({ title, courses, viewMore, viewLess }: Props) {
 
   return (
     <section
-      className={`${styles.cardAtributes} ${
+      className={`${styles.centeredCardAtributes} ${
         theme === 'light' ? styles.skillsSectionLight : styles.skillsSectionDark
       }`}
     >
@@ -62,10 +62,10 @@ export default function Courses({ title, courses, viewMore, viewLess }: Props) {
           );
         })}
       </div>
-      {courses.length > VISIBLE_COUNT && (
+      {(courses.length > VISIBLE_COUNT || expanded) && (
         <button
           onClick={toggleExpanded}
-          style={{ all: 'unset', cursor: 'pointer', marginTop: '1rem' }}
+          className={styles.toggleButton}
         >
           {expanded ? viewLess : viewMore}
         </button>

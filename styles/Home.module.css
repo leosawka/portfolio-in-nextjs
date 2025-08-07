@@ -11,6 +11,22 @@
   border-radius: 10px;
 }
 
+.centeredCardAtributes {
+  padding: 2rem;
+  margin: 2rem auto 0 auto;
+  max-width: 90vw;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.centeredCardAtributes button {
+  background-color: transparent;
+  font-size: 1rem;
+  border-style: hidden;
+  cursor: pointer;
+  color: var(--card-text-color)
+}
+
 .aboutLight {
   background-color: var(--card-bg-color);
   color: var(--card-text-color);
