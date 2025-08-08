@@ -1,11 +1,49 @@
-.courses {
+.coursesTile {
   padding: 2rem;
   margin: 2rem auto 0 auto;
   max-width: 90vw;
   border-radius: 10px;
   background-color: var(--card-bg-color);
   color: var(--card-text-color);
+}
+
+.coursesTileShadowLight {
   box-shadow: 8px 8px 4px 1px rgba(14, 18, 49, 0.493);
+}
+
+.coursesTileShadowDark {
+  box-shadow: 8px 8px 4px 1px rgba(155, 155, 155, 0.493);
+}
+
+.courses {
+  display: flex;
+  padding: 2rem;
+  margin: 2rem auto 0 auto;
+  max-width: 98%;
+  border-radius: 10px;
+  background-color: var(--card-bg-color);
+  color: var(--card-text-color);
+  transition: transform 0.4s ease;
+}
+
+.coursesShadowLight {
+  box-shadow: 8px 8px 4px 1px rgba(14, 18, 49, 0.493);
+}
+
+.coursesShadowDark {
+  box-shadow: 8px 8px 4px 1px rgba(155, 155, 155, 0.493);
+}
+
+.coursesShadowLight:hover {
+  box-shadow: 6px 6px 6px 1px rgba(14, 18, 49, 0.493);
+}
+
+.coursesShadowDark:hover {
+  box-shadow: 6px 6px 6px 1px rgba(155, 155, 155, 0.493);
+}
+
+.courses:hover {
+  transform: scale(1.01);
 }
 
 .title {
@@ -28,23 +66,25 @@
   box-shadow: 8px 8px 4px 1px rgba(155, 155, 155, 0.493);
   padding: 1rem;
   width: 100%;
-  max-width: 640px;
-  transition: transform 0.2s ease;
-}
-
-.card:hover {
-  transform: scale(1.01);
+  max-width: 100%;
 }
 
 .logo {
   width: 60px;
   height: 60px;
   object-fit: contain;
-  margin: 0 auto 0.5rem;
+  margin-right: 1rem;
 }
 
 .content {
-  text-align: center;
+  text-align: left;
+}
+
+.content span {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .courseTitle {
@@ -82,4 +122,3 @@
 .toggleButton:hover {
   text-decoration: underline;
 }
-

@@ -63,6 +63,7 @@ export default function Home() {
       <Projects title={texts.projectsTitle} projects={texts.projects} />
       <Courses
         title={texts.coursesTitle}
+        coursesLabels={texts.coursesLabels}
         courses={texts.courses}
         viewMore={texts.viewMore}
         viewLess={texts.viewLess}

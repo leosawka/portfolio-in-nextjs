@@ -74,6 +74,7 @@ export interface TextContent {
     errorMessage: string;
   };
   coursesTitle: string;
+  coursesLabels: CoursesHeads;
   courses: Course[];
   viewMore: string;
   viewLess: string;
@@ -81,12 +82,15 @@ export interface TextContent {
 
 export interface Course {
   title: string;
-  viewMore: string;
-  viewLess: string;
   description: string;
   date: string;
   certificateId: string;
   logo: string;
+}
+
+export interface CoursesHeads {
+  date: string;
+  ID: string;
 }
 
 
