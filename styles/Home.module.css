@@ -90,8 +90,8 @@
 }
 
 .experienceCardElement {
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: center;
   border-radius: 10px;
   padding: 1rem;
   display: flex;
@@ -109,6 +109,11 @@
   background-color: var(--bg-blend-inverted);
   color: var(--contrast-text);
   box-shadow: 8px 8px 4px 1px rgba(155, 155, 155, 0.493);
+}
+
+.experienceImage {
+  max-width: 4rem;
+  margin: 1rem;
 }
 
 @media (max-width: 1366px) {

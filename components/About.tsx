@@ -1,4 +1,5 @@
 import styles from '../styles/Home.module.css';
+import Image from 'next/image';
 import { useTheme } from '../contexts/ThemeContext';
 
 interface Props {
@@ -13,7 +14,7 @@ export default function About({ greeting, about }: Props) {
     <section className={`${styles.aboutSection} ${styles.cardAtributes} ${theme === 'light' ? styles.aboutLight : styles.aboutDark}`}>
       <img
         className={theme === 'light' ? styles.aboutSectionCardImgLight : styles.aboutSectionCardImgDark}
-        src="https://media.licdn.com/dms/image/v2/D4D03AQHZT1Nq5ncR5Q/profile-displayphoto-shrink_800_800/B4DZOceIYUHgAc-/0/1733496965288?e=1757548800&v=beta&t=ntug2Y_Vfocs_FcRNV1-Z0X9-y6vkeWfNYACXLlvSPo"
+        src="/profile/profile.jpg"
         alt="profile image"
       />
       <div>

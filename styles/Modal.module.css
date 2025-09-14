@@ -1,0 +1,59 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+  animation: fadeIn .15s ease-out;
+}
+
+.modal {
+  width: min(92vw, 720px);
+  max-height: 85vh;
+  overflow: auto;
+  background: var(--modal-bg, #1f1f1f);
+  color: var(--modal-fg, #fff);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  outline: none;
+  animation: pop .18s ease-out;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.title { margin: 0; font-size: 1.1rem; }
+
+.closeBtn {
+  border: 0;
+  background: transparent;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.content { padding: 16px; }
+
+/* Animations */
+@keyframes fadeIn { 
+    from {
+        opacity: 0; 
+    } 
+    to { 
+        opacity: 1; 
+    } 
+}
+@keyframes pop {
+    from {
+        transform: translateY(6px) scale(.98); opacity: .9; 
+    }
+    to { 
+        transform: translateY(0)   scale(1);   opacity: 1; 
+    } 
+}

@@ -1,5 +1,5 @@
-import type { TextContent, Project, TechStack, WorkContent, WorkHeads, SocialItem, IconMap } from '../types/index';
-import { useRef, useEffect, useState, FormEvent, ChangeEvent } from 'react';
+import type { TextContent, Project, TechStack, WorkContent, WorkHeads, SocialItem, IconMap, ModalContent } from '../types/index';
+import { useEffect, useState } from 'react';
 import { HackerRankIcon } from '../components/icons/HackerRankIcon';
 import { useBackgroundBlend } from '../hooks/useBackgroundBlend';
 import { LinkedinIcon } from '../components/icons/LinkedinIcon';
@@ -11,6 +11,7 @@ import { GmailIcon } from '../components/icons/GmailIcon';
 import WorkExperience from '../components/WorkExperience';
 import { useContactForm } from '../hooks/useContactForm';
 import { useTheme } from '../contexts/ThemeContext';
+import Modal from '../components/modal/Modal';
 import Projects from '../components/Projects';
 import Loading from '../components/Loading';
 import Contact from '../components/Contact';
@@ -28,13 +29,20 @@ const iconMap: IconMap = {
   Platzi: PlatziIcon
 };
 
-
 export default function Home() {
   const { language } = useLanguage();
   const { theme } = useTheme();
   const [texts, setTexts] = useState<TextContent | null>(null);
-  const sitekey = process.env.NEXT_PUBLIC_HCAPTCHA_SITEKEY!;
   const isReady = useBackgroundBlend(theme);
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState<ModalContent | null>(null);
+
+  const openCoursesModal = (content: ModalContent) => {
+    setModalContent(content);
+    setModalOpen(true);
+  };
+  const closeModal = () => setModalOpen(false);
 
   const {
     formData,
@@ -58,7 +66,11 @@ export default function Home() {
   return (
     <>
       <About greeting={texts.greeting} about={texts.about} />
-      <WorkExperience title={texts.workExperienceTitle} workLabels={texts.workLabels} workExperience={texts.workExperience}/>
+      <WorkExperience
+        title={texts.workExperienceTitle}
+        workLabels={texts.workLabels}
+        workExperience={texts.workExperience}
+      />
       <Skills title={texts.skills} stack={texts.stack} />
       <Projects title={texts.projectsTitle} projects={texts.projects} />
       <Courses
@@ -67,6 +79,8 @@ export default function Home() {
         courses={texts.courses}
         viewMore={texts.viewMore}
         viewLess={texts.viewLess}
+        onOpenDetails={openCoursesModal}
+        detailsLabel={"Qué es Platzi?"}
       />
       <Contact
         contactTitle={texts.contactTitle}
@@ -81,6 +95,9 @@ export default function Home() {
         onVerify={handleCaptchaVerify}
       />
       <Social title={texts.socialTitle} items={texts.social} iconMap={iconMap} />
+      <Modal isOpen={modalOpen} title={modalContent?.title} onClose={closeModal}>
+        {modalContent?.body}
+      </Modal>
     </>
   );
 }

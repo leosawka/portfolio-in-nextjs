@@ -7,7 +7,7 @@ export interface SocialItem {
 }
 
 export interface WorkContent {
-  iconImage: string;
+  iconImage: string | null;
   from: string;
   to: string;
   jobtitle: string;
@@ -51,6 +51,7 @@ export interface TextContent {
   greeting: string;
   about: string;
   skills: string;
+  iconImage: string;
   workExperienceTitle: string;
   workLabels: WorkHeads;
   workExperience: WorkContent[];
@@ -86,6 +87,14 @@ export interface Course {
   date: string;
   certificateId: string;
   logo: string;
+  provider?: string;
+  providerUrl?: string;
+}
+
+export interface CoursesProviderInfo {
+  about: string;
+  url?: string;
+  logo?: string;
 }
 
 export interface CoursesHeads {
@@ -93,5 +102,9 @@ export interface CoursesHeads {
   ID: string;
 }
 
+export type ModalContent = {
+  title: string;
+  body: React.ReactNode;
+};
 
 export type IconMap = Record<string, FC<{ theme: 'light' | 'dark'; size?: number }>>;
