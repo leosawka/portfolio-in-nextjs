@@ -10,16 +10,16 @@ interface Props {
   viewMore: string;
   viewLess: string;
   onOpenDetails?: (content: ModalContent) => void;
-  detailsLabel?: string; // si querés mantener tu botón “ver todo”
-  /** NUEVO: mapa i18n de providers */
+  detailsLabel?: string;
   providersMap?: Record<string, CoursesProviderInfo>;
+  whatIsPrefix?: string;
 }
 
 const VISIBLE_COUNT = 3;
 
 export default function Courses({
   title, coursesLabels, courses, viewMore, viewLess,
-  onOpenDetails, detailsLabel = 'details', providersMap
+  onOpenDetails, detailsLabel = 'details', providersMap, whatIsPrefix = 'What is',
 }: Props) {
   const { theme } = useTheme();
   const [expanded, setExpanded] = useState(false);
@@ -32,17 +32,23 @@ export default function Courses({
     const provider = course.provider;
     const info = providersMap?.[provider];
     const url = info?.url || course.providerUrl;
-    const logo = info?.logo || course.logo;
+
+
+    const rawLogo = info?.logo ?? course.logo;
+    const logo = typeof rawLogo === 'string' ? rawLogo : undefined;
 
     onOpenDetails({
-      title: `¿Qué es ${provider}?`,
+      title: `${whatIsPrefix} ${provider}?`,
       body: (
         <div style={{ display: 'grid', gap: 12 }}>
           {logo && (
             <img
               src={logo}
               alt={provider}
-              style={{ width: 120, height: 'auto', borderRadius: 8, justifySelf: 'start' }}
+              className={styles.modalLogo}
+              style={{ display: 'block' }}
+              loading="lazy"
+              decoding="async"
             />
           )}
           <p style={{ marginTop: 0 }}>
@@ -71,7 +77,7 @@ export default function Courses({
       <div className={styles.card}>
         {visibleCourses.map((course, id) => {
           if (!course || typeof course !== 'object') return null;
-          const { title: t, description, date, certificateId, logo, provider } = course;
+          const { title: text, description, date, certificateId, logo, provider } = course;
 
           return (
             <div
@@ -79,31 +85,33 @@ export default function Courses({
               className={`${styles.courses} ${theme === 'light' ? styles.coursesShadowLight : styles.coursesShadowDark}`}
               style={{ whiteSpace: 'pre-line' }}
             >
-              {logo && <img className={styles.logo} src={logo} alt={t} />}
-              <div className={styles.content}>
-                <span><strong>{t}</strong></span>
-                {description && <div><span>{description}</span></div>}
-                {date && <div><strong>{coursesLabels.date}:</strong> <span>{date}</span></div>}
-                {certificateId && (
-                  <div>
-                    <strong>{coursesLabels.ID}:</strong> <span>{certificateId}</span>
-                  </div>
-                )}
-
-                {/* Botón por curso si hay provider */}
-                {onOpenDetails && provider && (
-                  <div style={{ marginTop: 8 }}>
-                    <button
-                      className={styles.toggleButton}
-                      onClick={() => openProviderDetails(course)}
-                      aria-label={`¿Qué es ${provider}?`}
-                      title={`¿Qué es ${provider}?`}
-                    >
-                      ¿Qué es {provider}?
-                    </button>
-                  </div>
-                )}
+              <div style={{ display: "flex" }}>
+                {logo && <img className={styles.logo} src={logo} alt={text} />}
+                <div className={styles.content}>
+                  <span><strong>{text}</strong></span>
+                  {description && <div><span>{description}</span></div>}
+                  {date && <div><strong>{coursesLabels.date}:</strong> <span>{date}</span></div>}
+                  {certificateId && (
+                    <div>
+                      <div>
+                        <strong>{coursesLabels.ID}:</strong> <span>{certificateId}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
+              {onOpenDetails && provider && (
+                <div style={{ marginTop: 8 }}>
+                  <button
+                    className={theme === 'light' ? styles.coursesHoverDark: styles.coursesHover}
+                    onClick={() => openProviderDetails(course)}
+                    aria-label={`${whatIsPrefix} ${provider}?`}
+                    title={`${whatIsPrefix} ${provider}?`}
+                  >
+                    {whatIsPrefix} {provider}?
+                  </button>
+                </div>
+              )}
             </div>
           );
         })}

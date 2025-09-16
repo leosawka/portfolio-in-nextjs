@@ -80,7 +80,9 @@ export default function Home() {
         viewMore={texts.viewMore}
         viewLess={texts.viewLess}
         onOpenDetails={openCoursesModal}
-        detailsLabel={"Qué es Platzi?"}
+        detailsLabel={"Ver todos"}
+        providersMap={texts.coursesProviders}
+        whatIsPrefix={language === 'es' ? '¿Qué es' : 'What is'}
       />
       <Contact
         contactTitle={texts.contactTitle}

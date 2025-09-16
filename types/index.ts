@@ -1,9 +1,11 @@
 import { FC } from 'react';
 
+export type SocialPlatform = 'Github' | 'Gmail' | 'Linkedin' | 'Telegram' | 'HackerRank' | 'Platzi';
+
 export interface SocialItem {
   label: string;
   url: string;
-  icon: string;
+  icon?: SocialPlatform;
 }
 
 export interface WorkContent {
@@ -47,6 +49,7 @@ export interface Project {
 }
 
 export interface TextContent {
+  coursesProviders: Record<string, CoursesProviderInfo> | undefined;
   labels: any;
   greeting: string;
   about: string;

@@ -17,6 +17,8 @@
 
 .courses {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 2rem;
   margin: 2rem auto 0 auto;
   max-width: 98%;
@@ -102,6 +104,28 @@
 .meta {
   font-size: 0.85rem;
   color: var(--text-muted, #888);
+}
+
+.coursesHover {
+  color: #000;
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+.coursesHoverDark {
+  color: #fff;
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+.modalLogo {
+  width: 8rem;
+  border-radius: 5px;
+  box-shadow: 2px 2px 8px #afafaf;
+  display: block;
+  margin: auto;
 }
 
 .toggleButton {

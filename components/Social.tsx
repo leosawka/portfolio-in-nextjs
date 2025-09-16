@@ -2,17 +2,24 @@ import { FC } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 import styles from '../styles/Social.module.css';
 import homeStyles from '../styles/Home.module.css';
-
-interface SocialItem {
-  label: string;
-  url: string;
-  icon: string;
-}
+import type { SocialItem, IconMap } from '../types';
 
 interface Props {
   title: string;
   items: SocialItem[];
-  iconMap: Record<string, FC<{ theme: 'light' | 'dark'; size?: number }>>;
+  iconMap: IconMap;
+}
+
+function normalizeHref(url: string, iconKey?: string) {
+  const trimmed = url.trim();
+  const lower = trimmed.toLowerCase();
+  if (lower.startsWith('http://') || lower.startsWith('https://') || lower.startsWith('mailto:')) {
+    return trimmed;
+  }
+  if (trimmed.includes('@') || iconKey === 'Gmail') {
+    return `mailto:${trimmed}`;
+  }
+  return `https://${trimmed}`;
 }
 
 export default function Social({ title, items, iconMap }: Props) {
@@ -23,14 +30,19 @@ export default function Social({ title, items, iconMap }: Props) {
       <h2 className={styles.socialTitle}>{title}</h2>
       <div className={styles.socialLinks}>
         {items.map((item) => {
-          const IconComponent = iconMap[item.label];
+          const iconKey = (item.icon ?? item.label) as keyof typeof iconMap;
+          const IconComponent = iconMap[iconKey];
+          const href = normalizeHref(item.url, String(iconKey));
+
           return (
             <a
-              key={item.label}
-              href={item.url}
+              key={`${item.label}-${item.url}`}
+              href={href}
               className={`${styles.socialLink} ${theme === 'light' ? styles.socialLinkLight : styles.socialLinkDark}`}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={item.label}
+              title={item.label}
             >
               <div className={`${styles.iconWrapper} ${theme === 'light' ? styles.light : styles.dark}`}>
                 {IconComponent && <IconComponent theme={theme} size={24} />}

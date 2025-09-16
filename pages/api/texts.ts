@@ -1,9 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { texts, Language } from '@/utils/textsData';
+import { en } from '../../src/utils/texts/en';
+import { es } from '../../src/utils/texts/es';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { lang } = req.query;
-  const language = (lang === 'es' ? 'es' : 'en') as Language;
-
-  res.status(200).json(texts[language]);
+  const { lang = 'en' } = req.query;
+  const data = lang === 'es' ? es : en;
+  res.status(200).json(data);
 }
