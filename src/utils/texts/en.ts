@@ -6,33 +6,33 @@ export const en: TextContent = {
     iconImage: LOGOS.santex,
     coursesProviders: {
         Platzi: {
-            about: 'Platzi is a Mexican online education platform focused on technology and digital skills, founded in 2011 by Freddy Vega. It offers courses and personalized learning paths in areas such as web development, artificial intelligence, marketing, and cybersecurity.',
+            about: 'Platzi is a Mexican online education platform focused on technology and digital skills, founded in 2011 by Freddy Vega. It offers courses and personalized learning paths in areas such as web development, artificial intelligence, marketing, and cybersecurity. \n\nTo obtain a certificate, students must pass an exam with a minimum score of 9 out of 10 (90%) and also submit a practical project following the guidelines from the videos, which must be approved. Currently, the project’s code cannot be validated, but profiles are public and display the completed courses.',
             url: COMMON_LINKS.platzi,
             logo: LOGOS.platzi,
         },
         'LinkedIn Learning': {
-            about: 'LinkedIn Learning is an online learning platform with videos and courses taught by experts, providing individuals and organizations the opportunity to develop skills in areas such as business, technology, and creativity.',
+            about: 'LinkedIn Learning is an online learning platform with videos and courses taught by experts, providing individuals and organizations the opportunity to develop skills in areas such as business, technology, and creativity. \n\nTo obtain a certificate, students must complete all course modules and pass the included assessments, which consist of multiple-choice quizzes and, in some cases, practical exercises. Certificates are issued directly on the user’s LinkedIn profile, making acquired skills publicly validated.',
             url: COMMON_LINKS.linkedinLearning,
             logo: LOGOS.linkedin,
         },
         'Project Management Institute': {
-            about: 'The Project Management Institute (PMI) is a nonprofit professional organization and the world’s leading authority in project management. It promotes the discipline, sets standards, provides certifications, and generates knowledge through research to empower professionals and organizations worldwide.',
+            about: 'The Project Management Institute (PMI) is a nonprofit professional organization and the world’s leading authority in project management. It promotes the discipline, sets standards, provides certifications, and generates knowledge through research to empower professionals and organizations worldwide. \n\nTo obtain a certification such as PMP or CAPM, candidates must meet prerequisites in prior experience and academic training, as well as pass a rigorous multiple-choice exam that assesses both theoretical and practical project management knowledge. Certifications must be maintained through continuous education via Professional Development Units (PDUs).',
             logo: LOGOS.projectManagementInstitude,
         },
         'CPE Sponsors': {
-            about: 'A CPE Sponsor is an organization or individual recognized by NASBA’s National Registry of CPE Sponsors that offers continuing professional education (CPE) programs that meet national standards. These programs help professionals, especially CPAs, maintain their skills and fulfill education requirements to retain certifications such as CPA or CMA.',
+            about: 'A CPE Sponsor is an organization or individual recognized by NASBA’s National Registry of CPE Sponsors that offers continuing professional education (CPE) programs that meet national standards. These programs help professionals, especially CPAs, maintain their skills and fulfill education requirements to retain certifications such as CPA or CMA. \n\nTo earn CPE hours, participants must attend training sessions, pass knowledge assessments, and in some cases submit practical assignments or case studies. The credits earned are recorded and may be audited by regulatory bodies.',
             logo: LOGOS.CPESponsors,
         },
         Busuu: {
-            about: 'Busuu is an online language-learning platform similar to Duolingo, available as both a web and mobile application. It offers interactive courses to learn and practice 14 languages. It combines self-study with a community system where users can correct each other’s exercises, receive feedback, and also access live lessons with teachers and officially recognized certificates.',
+            about: 'Busuu is an online language-learning platform similar to Duolingo, available as both a web and mobile application, offering interactive courses to learn and practice 14 languages. It combines self-study with a community system where users can correct each other’s exercises and receive feedback, as well as the option of live lessons with teachers and officially recognized certificates. \n\nTo obtain an official certificate, students must complete all levels of a language course and pass the final assessments. Certificates are issued in collaboration with partner educational organizations and reflect the level achieved according to the Common European Framework of Reference (CEFR).',
             logo: LOGOS.Busuu,
         },
         UTN: {
-            about: 'The National Technological University (UTN) is a free, public university in Argentina dedicated to training engineers and technology professionals. It has a network of regional faculties across the country. Founded in 1948 as the National Workers’ University, it focuses on public education, applied research for industrial and national development, and social inclusion, offering tuition-free programs with strong ties to the productive sector.',
+            about: 'The National Technological University (UTN) is a free, public university in Argentina dedicated to training engineers and technology professionals, with a network of regional faculties across the country. Founded in 1948 as the National Workers’ University, it focuses on public education, applied research for industrial and national development, and social inclusion, offering tuition-free programs with strong ties to the productive sector. \n\nTo complete courses and diploma programs, students must attend theoretical and practical classes, pass midterm and final exams, and in some cases present projects or integrative assignments. Certificates issued by UTN carry official recognition throughout Argentina.',
             logo: LOGOS.UTN,
         },
         Santex: {
-            about: 'Santex, a technology company, organizes and supports XAcademy, a free and virtual tech training program aimed at closing the gap between the skills demanded in the IT sector and access to such training, fostering job placement in areas like programming and software testing.',
+            about: 'Santex is a technology company that organizes and supports XAcademy, a free and virtual training program designed to close the gap between the skills demanded in the IT sector and access to such training, fostering job placement in areas like programming and software testing. \n\nStudents participating in XAcademy must complete practical modules with guided projects and submit deliverables evaluated by company mentors. Once projects and assessments are approved, they receive a certificate endorsed by Santex, validating the acquired skills and serving as proof in job application processes.',
             logo: LOGOS.santex,
         },
     },

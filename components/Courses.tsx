@@ -51,7 +51,7 @@ export default function Courses({
               decoding="async"
             />
           )}
-          <p style={{ marginTop: 0 }}>
+          <p style={{ marginTop: 0, whiteSpace: "pre-line" }}>
             {info?.about || `Descripción breve de ${provider}. (Agregá 'coursesProviders["${provider}"].about' en tus textos para i18n.)`}
           </p>
           {url && (

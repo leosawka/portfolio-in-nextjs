@@ -6,33 +6,33 @@ export const es: TextContent = {
   iconImage: LOGOS.santex,
   coursesProviders: {
     Platzi: {
-      about: 'Platzi es una plataforma Mexicana de educación en línea enfocada en tecnología y habilidades digitales fundada en 2011 por Freddy Vega. Ofrece cursos y rutas de aprendizaje personalizadas en áreas como desarrollo web, inteligencia artificial, marketing y ciberseguridad.',
+      about: 'Platzi es una plataforma mexicana de educación en línea enfocada en tecnología y habilidades digitales, fundada en 2011 por Freddy Vega. Ofrece cursos y rutas de aprendizaje personalizadas en áreas como desarrollo web, inteligencia artificial, marketing y ciberseguridad. \n\nPara obtener un certificado, el estudiante debe aprobar un examen con una calificación mínima de 9 sobre 10 (90%) y además presentar un trabajo práctico siguiendo los lineamientos de los videos, el cual debe ser aprobado. Actualmente no se puede validar el código del trabajo, pero los perfiles son públicos y muestran los cursos completados.',
       url: COMMON_LINKS.platzi,
       logo: LOGOS.platzi,
     },
     'LinkedIn Learning': {
-      about: 'LinkedIn Learning es una plataforma de aprendizaje en línea con videos y cursos impartidos por expertos, que ofrece a las personas y organizaciones la oportunidad de desarrollar habilidades en áreas como negocios, tecnología y creatividad.',
+      about: 'LinkedIn Learning es una plataforma de aprendizaje en línea con videos y cursos impartidos por expertos, que ofrece a las personas y organizaciones la oportunidad de desarrollar habilidades en áreas como negocios, tecnología y creatividad. \n\nPara obtener un certificado, los estudiantes deben completar todos los módulos del curso y aprobar las evaluaciones incluidas, que consisten en cuestionarios de opción múltiple y, en algunos casos, ejercicios prácticos. Los certificados se emiten directamente en el perfil de LinkedIn del usuario, permitiendo validar las competencias adquiridas de manera pública.',
       url: COMMON_LINKS.linkedinLearning,
       logo: LOGOS.linkedin,
     },
     'Project Management Institute': {
-      about: 'El Project Management Institute (PMI) es una organización profesional sin fines de lucro y la principal autoridad mundial en gestión de proyectos, que promueve la disciplina, establece estándares, ofrece certificaciones y genera conocimiento a través de la investigación para empoderar a profesionales y organizaciones en todo el mundo.',
+      about: 'El Project Management Institute (PMI) es una organización profesional sin fines de lucro y la principal autoridad mundial en gestión de proyectos, que promueve la disciplina, establece estándares, ofrece certificaciones y genera conocimiento a través de la investigación para empoderar a profesionales y organizaciones en todo el mundo. \n\nPara obtener una certificación como PMP o CAPM, los candidatos deben cumplir con requisitos de experiencia previa y formación académica, además de aprobar un examen riguroso de opción múltiple que evalúa conocimientos teóricos y prácticos en gestión de proyectos. Las certificaciones requieren mantenimiento continuo mediante créditos de desarrollo profesional (PDUs).',
       logo: LOGOS.projectManagementInstitude,
     },
     'CPE Sponsors': {
-      about: 'Un CPE Sponsor (Patrocinador de CPE) es una organización o individuo reconocido por el Registro Nacional de Patrocinadores de CPE de la NASBA que ofrece programas de educación profesional continua (CPE) cumpliendo con estándares nacionales. Estos programas ayudan a los profesionales, especialmente a los contadores públicos, a mantener sus habilidades y cumplir con los requisitos de educación para conservar certificaciones como CPA o CMA.',
+      about: 'Un CPE Sponsor (Patrocinador de CPE) es una organización o individuo reconocido por el Registro Nacional de Patrocinadores de CPE de la NASBA que ofrece programas de educación profesional continua (CPE) cumpliendo con estándares nacionales. Estos programas ayudan a los profesionales, especialmente a los contadores públicos, a mantener sus habilidades y cumplir con los requisitos de educación para conservar certificaciones como CPA o CMA. \n\nPara acreditar las horas de CPE, el participante debe asistir a las sesiones de formación, aprobar evaluaciones de conocimiento, y en algunos casos entregar trabajos prácticos o estudios de caso. Los créditos obtenidos quedan registrados y pueden ser auditados por los organismos reguladores.',
       logo: LOGOS.CPESponsors,
     },
     Busuu: {
-      about: 'Busuu es una plataforma en línea similar a Duolingo para el aprendizaje de idiomas, disponible como aplicación web y móvil, que ofrece cursos interactivos para aprender y practicar 14 idiomas. Combina autoaprendizaje con un sistema de comunidad donde los usuarios pueden corregir ejercicios de otros y recibir correcciones, además de ofrecer la opción de lecciones en directo con profesores y certificados reconocidos por su contenido.',
+      about: 'Busuu es una plataforma en línea similar a Duolingo para el aprendizaje de idiomas, disponible como aplicación web y móvil, que ofrece cursos interactivos para aprender y practicar 14 idiomas. Combina autoaprendizaje con un sistema de comunidad donde los usuarios pueden corregir ejercicios de otros y recibir correcciones, además de ofrecer la opción de lecciones en directo con profesores y certificados reconocidos por su contenido. \n\nPara obtener un certificado oficial, los estudiantes deben completar todos los niveles de un curso de idioma y aprobar las pruebas finales. Los certificados son emitidos en colaboración con organizaciones educativas asociadas, y reflejan el nivel alcanzado según el Marco Común Europeo de Referencia (MCER).',
       logo: LOGOS.Busuu,
     },
     UTN: {
-      about: 'La Universidad Tecnológica Nacional (UTN) es una universidad pública y gratuita de Argentina, dedicada a la formación de ingenieros y profesionales en tecnología, con una red de facultades regionales en todo el país. Fundada en 1948 como la Universidad Obrera Nacional, tiene un enfoque en la educación pública, la investigación aplicada al desarrollo industrial y nacional, y la inclusión social, con carreras gratuitas y un fuerte vínculo con el sector productivo.',
+      about: 'La Universidad Tecnológica Nacional (UTN) es una universidad pública y gratuita de Argentina, dedicada a la formación de ingenieros y profesionales en tecnología, con una red de facultades regionales en todo el país. Fundada en 1948 como la Universidad Obrera Nacional, tiene un enfoque en la educación pública, la investigación aplicada al desarrollo industrial y nacional, y la inclusión social, con carreras gratuitas y un fuerte vínculo con el sector productivo. \n\nPara aprobar los cursos y diplomaturas, los estudiantes deben asistir a clases teóricas y prácticas, rendir parciales y finales, y en algunos casos presentar proyectos o trabajos integradores. Los certificados emitidos por la UTN gozan de reconocimiento oficial en toda Argentina.',
       logo: LOGOS.UTN,
     },
     Santex: {
-      about: 'Santex, es una compañía tecnológica, organiza y respalda a XAcademy, un programa de formación tecnológica gratuita y virtual que busca cerrar la brecha entre las habilidades demandadas en el sector IT y el acceso a esa formación, fomentando la inserción laboral en áreas como programación y testing de software.',
+      about: 'Santex es una compañía tecnológica que organiza y respalda XAcademy, un programa de formación gratuita y virtual que busca cerrar la brecha entre las habilidades demandadas en el sector IT y el acceso a esa formación, fomentando la inserción laboral en áreas como programación y testing de software. \n\nLos estudiantes que participan en XAcademy deben completar módulos prácticos con proyectos guiados, y presentar entregables que son evaluados por mentores de la empresa. Una vez aprobados los proyectos y evaluaciones, reciben un certificado avalado por Santex, que valida las competencias adquiridas y puede ser utilizado en procesos de selección laboral.',
       logo: LOGOS.santex,
     },
   },

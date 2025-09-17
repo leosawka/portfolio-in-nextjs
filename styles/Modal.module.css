@@ -9,15 +9,37 @@
 }
 
 .modal {
-  width: min(92vw, 720px);
-  max-height: 85vh;
-  overflow: auto;
   background: var(--modal-bg, #1f1f1f);
   color: var(--modal-fg, #fff);
   border-radius: 14px;
+  padding: 2rem;
+  width: min(92vw, 720px);
+  max-height: 85vh;
+  overflow: auto;
   box-shadow: 0 10px 30px rgba(0,0,0,.35);
   outline: none;
-  animation: pop .18s ease-out;
+  opacity: 0;
+  animation: scaleUp .5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+.modal.out {
+  animation: scaleDown .5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+.modalBackground {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+
+  animation: fadeIn .5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+.modalBackground.out {
+  animation: fadeOut .5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
 
 .header {
@@ -41,19 +63,36 @@
 .content { padding: 16px; }
 
 /* Animations */
-@keyframes fadeIn { 
-    from {
-        opacity: 0; 
-    } 
-    to { 
-        opacity: 1; 
-    } 
+@keyframes fadeIn {
+  from {
+    background: rgba(0,0,0,0);
+  }
+  to {
+    background: rgba(0,0,0,.6);
+  }
 }
-@keyframes pop {
-    from {
-        transform: translateY(6px) scale(.98); opacity: .9; 
-    }
-    to { 
-        transform: translateY(0)   scale(1);   opacity: 1; 
-    } 
+@keyframes fadeOut {
+  from { 
+    background: rgba(0,0,0,.6);
+  }
+  to {
+    background: rgba(0,0,0,0);
+  }
+}
+@keyframes scaleUp {
+  from {
+    transform: scale(0.8); opacity: 0;
+  }
+  to {
+    transform: scale(1); opacity: 1;
+  }
+}
+
+@keyframes scaleDown {
+  from {
+    transform: scale(1); opacity: 1;
+  }
+  to {
+    transform: scale(0.8); opacity: 0;
+  }
 }
