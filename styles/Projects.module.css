@@ -104,11 +104,11 @@
 }
 
 .projectsSectionLight .fadeLeft {
-  background: linear-gradient(to right, rgba(64, 64, 64, 1), rgba(64, 64, 64, 0));
+  background: linear-gradient(to right, rgba(43, 43, 43, 1), rgba(64, 64, 64, 0));
 }
 
 .projectsSectionLight .fadeRight {
-  background: linear-gradient(to left, rgba(64, 64, 64, 1), rgba(64, 64, 64, 0));
+  background: linear-gradient(to left, rgba(43, 43, 43, 1), rgba(64, 64, 64, 0));
 }
 
 
