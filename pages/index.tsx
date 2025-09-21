@@ -19,6 +19,7 @@ import Courses from '../components/Courses';
 import Skills from '../components/Skills';
 import Social from '../components/Social';
 import About from '../components/About';
+import Head from 'next/head';
 
 const iconMap: IconMap = {
   Github: GithubIcon,
@@ -62,6 +63,16 @@ export default function Home() {
   }, [language]);
 
   if (!texts) return <Loading />;
+
+  const pageTitle =
+    language === 'es'
+      ? 'Inicio — Jairo L. Olivera'
+      : 'Home — Jairo L. Olivera';
+
+  const pageDescription =
+    language === 'es'
+      ? 'Proyectos destacados, experiencia y contacto.'
+      : 'Featured projects, experience, and contact.';
 
   return (
     <>

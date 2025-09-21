@@ -1,35 +1,42 @@
 import { checkRateLimit } from '@/utils/rateLimiter';
 import { isEmailValid } from '@/utils/validateEmail';
-import { NextApiRequest, NextApiResponse } from 'next';
-import { texts } from '@/utils/textsData';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-const detectLang = (req: NextApiRequest): 'es' | 'en' => {
-  const acceptLang = req.headers['accept-language'] || '';
-  return acceptLang.toString().toLowerCase().startsWith('es') ? 'es' : 'en';
+import { es } from '../../src/utils/texts/es';
+import { en } from '../../src/utils/texts/en';
+
+type Lang = 'es' | 'en';
+const getTexts = (lang: Lang) => (lang === 'en' ? en : es);
+
+const resolveLang = (req: NextApiRequest): Lang => {
+  const fromBody = typeof req.body?.lang === 'string' ? req.body.lang : undefined;
+  const fromQuery = typeof req.query?.lang === 'string' ? req.query.lang : undefined;
+  const acceptLang = (req.headers['accept-language'] || '').toString().toLowerCase();
+  const raw = (fromBody || fromQuery || (acceptLang.startsWith('es') ? 'es' : 'en')).toLowerCase();
+  return raw === 'en' ? 'en' : 'es';
 };
 
-const getErrorTexts = (lang: 'es' | 'en') => {
-  const t = texts[lang].contactForm;
-  return {
-    missingFields: t.error,
-    invalidEmail: t.invalidFormat,
-    disposableEmail: t.disposableEmail,
-    rateLimit: t.error,
-    captchaMissing: t.error,
-    captchaFail: t.error,
-    telegramFail: t.error,
-  };
-};
+const getErrorTexts = (t: any) => ({
+  missingFields: t.contactForm.error,
+  invalidEmail: t.contactForm.invalidFormat,
+  disposableEmail: t.contactForm.disposableEmail,
+  rateLimit: t.contactForm.error,
+  captchaMissing: t.contactForm.error,
+  captchaFail: t.contactForm.error,
+  telegramFail: t.contactForm.error,
+});
 
+const escapeMd = (s: string) =>
+  String(s).replace(/([_*\[\]()~`>#+\-=|{}.!\\])/g, '\\$1');
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const lang = detectLang(req);
-  const t = getErrorTexts(lang);
-
-
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method Not Allowed' });
   }
+
+  const lang = resolveLang(req);
+  const locale = getTexts(lang);
+  const t = getErrorTexts(locale);
 
   const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
   if (!checkRateLimit(String(ip))) {
@@ -46,17 +53,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(400).json({ message: t.invalidEmail });
   }
 
-  const hcaptchaSecret = process.env.HCAPTCHA_SECRET;
-
   if (!hcaptchaToken) {
     return res.status(400).json({ message: t.captchaMissing });
   }
 
+  if (!process.env.HCAPTCHA_SECRET) {
+    console.error('[hCaptcha] Missing HCAPTCHA_SECRET');
+    return res.status(500).json({ message: t.captchaFail });
+  }
+
   try {
+    const body = new URLSearchParams({
+      response: String(hcaptchaToken),
+      secret: String(process.env.HCAPTCHA_SECRET),
+    }).toString();
+
     const hcaptchaRes = await fetch('https://hcaptcha.com/siteverify', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `response=${hcaptchaToken}&secret=${hcaptchaSecret}`,
+      body,
     });
 
     const hcaptchaData = await hcaptchaRes.json();
@@ -73,20 +88,37 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const telegramBotToken = process.env.TELEGRAM_BOT_TOKEN;
   const telegramChatId = process.env.TELEGRAM_CHAT_ID;
 
-  const text = `*Nuevo mensaje de contacto*\nNombre: ${name}\nEmail: ${email}\nMensaje:\n${message}`;
+  if (!telegramBotToken || !telegramChatId) {
+    console.error('[Telegram] Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID');
+    return res.status(500).json({ message: t.telegramFail });
+  }
+
+  const text = [
+    `*${escapeMd('Nuevo mensaje de contacto')}*`,
+    `Nombre: ${escapeMd(name)}`,
+    `Email: ${escapeMd(email)}`,
+    `Mensaje:\n${escapeMd(message)}`
+  ].join('\n');
 
   try {
-    const response = await fetch(
-      `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${encodeURIComponent(text)}`
-    );
+    const response = await fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: telegramChatId,
+        text,
+        parse_mode: 'MarkdownV2',
+        disable_web_page_preview: true,
+      }),
+    });
 
     if (!response.ok) {
-      const errorData = await response.json();
+      const errorData = await response.json().catch(() => ({}));
       console.error('[Telegram] API response:', errorData);
       throw new Error('Telegram API error');
     }
 
-    return res.status(200).json({ message: texts[lang].contactForm.success });
+    return res.status(200).json({ message: locale.contactForm.success });
   } catch (error) {
     console.error('[Telegram] Error:', error);
     return res.status(500).json({ message: t.telegramFail });

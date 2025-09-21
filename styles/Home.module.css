@@ -114,6 +114,7 @@
 .experienceImage {
   max-width: 4rem;
   margin: 1rem;
+  border-radius: 5px;
 }
 
 @media (max-width: 1366px) {

@@ -28,6 +28,7 @@ export default function WorkExperience({ title, workLabels, workExperience }: Pr
                 alt={exp.company}
                 className={styles.experienceImage}
                 loading="lazy"
+                decoding='async'
               />
             )}
             <div>

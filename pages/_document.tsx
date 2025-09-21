@@ -12,7 +12,6 @@ class MyDocument extends Document {
         <Head >
           <link rel="icon" href="/LS-black.png" media="(prefers-color-scheme: light)"/>
           <link rel="icon" href="/LS-white.png" media="(prefers-color-scheme: dark)"/>
-          <title>Portfolio</title>
         </Head>
         <body>
           <Main />
