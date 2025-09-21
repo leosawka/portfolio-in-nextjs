@@ -36,7 +36,7 @@ export default function WorkExperience({ title, workLabels, workExperience }: Pr
               <div>
                 <strong>{workLabels.company}:</strong> {exp.company} — <strong>{workLabels.position}:</strong> {exp.jobtitle}
               </div>
-              <strong>{workLabels.highlights}:</strong>
+              <strong>{workLabels.highlights}:</strong><br />
               {exp.highlights.map((highlight) => `• ${highlight}`).join('\n')}
               <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', marginTop: '1rem' }}>
                 <div style={{ marginTop: '1rem' }}>
