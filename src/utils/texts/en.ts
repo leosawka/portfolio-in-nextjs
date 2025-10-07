@@ -48,7 +48,7 @@ export const en: TextContent = {
         devops: ['Docker', 'CI/CD', 'Git', 'Github', 'Azure', 'HTTPS'],
         testing: ['Jest', 'Cypress', 'Pytest', 'Unit testing', 'QA automation'],
         ai: ['OpenAI', 'Groq', 'LLM integration', 'YOLOv8', 'Pandas', 'Data visualization', 'Basic AI modeling'],
-        tools: ['Odoo', 'Magento', 'Prestashop', 'Figma', 'Miro', 'Powerpoint', 'Google Sheets', 'Excel', 'Word', 'Airtable'],
+        tools: ["Wordpress", "Wix", "Duda", 'Odoo', 'Magento', 'Prestashop', 'Figma', 'Miro', 'Powerpoint', 'Google Sheets', 'Excel', 'Word', 'Airtable'],
         softskills: ['Teamwork', 'Troubleshooting', 'Critical thinking', 'Technical documentation', 'Project management', 'INTJ'],
         languagesSpoken: ['English', 'Italian', 'Japanese', 'Polish'],
     },
@@ -56,7 +56,7 @@ export const en: TextContent = {
     workLabels: { from: 'From', to: 'to', position: 'Position/Role', company: 'Company', highlights: 'Responsibilities and achievements', technologies: 'Technologies' },
     workExperience: [
         { iconImage: LOGOS.PWC, from: 'Oct 2022', to: 'Dec 2024', jobtitle: 'Associate 2', company: 'Pricewaterhousecoopers', highlights: ['Delivered high-quality enhancements for a React-TypeScript web application for Bristol-Myers Squibb, ensuring project alignment and client satisfaction.', 'Led the migration of a SharePoint database to a scalable platform, improving efficiency and usability.', 'Maintained a robust Azure-based support platform for NBCUniversal, ensuring seamless operation and issue resolution.'], tecnologies: ['Trello', 'Miro', 'Figma', 'JavaScript', 'Python', '.NET', "C#", 'Sharepoint', 'React', 'Typescript', 'MySQL', 'JSON', 'Postman'] },
-        { iconImage: LOGOS.Oliteam, from: 'Jan 2020', to: 'Oct 2022', jobtitle: 'Project Manager', company: 'OliTeam', highlights: ['Co-founded the organization, overseeing small-scale projects and mentoring new developers.', 'Introduced innovative programming pathways to accelerate skill development among junior team members.'], tecnologies: ['Java', 'Python', 'JavaScript', 'NodeJs', 'Express', 'React', 'Redux', 'MongoDB', 'PostgreSQL', 'MySQL', 'PL/SQL', 'JSON', 'Postman'] },
+        { iconImage: LOGOS.Oliteam, from: 'Jan 2020', to: 'Oct 2022', jobtitle: 'Project Manager', company: 'OliTeam', highlights: ['Co-founded the organization, overseeing small-scale projects and mentoring new developers.', 'Introduced innovative programming pathways to accelerate skill development among junior team members.'], tecnologies: ['Java', 'Python', 'JavaScript', 'NodeJs', 'Express', 'React', 'Redux',"Wordpress", "Wix", "Duda", 'MongoDB', 'PostgreSQL', 'MySQL', 'PL/SQL', 'JSON', 'Postman'] },
         { iconImage: LOGOS.Halala, from: 'Jan 2020', to: 'Feb 2021', jobtitle: 'Frontend Developer', company: 'Halalá', highlights: ['Designed and developed a mobile-first e-commerce application connecting raw material producers with manufacturers.', 'Spearheaded the UI/UX design process, enhancing user engagement and navigation efficiency.'], tecnologies: ['JavaScript', 'React', 'Redux', 'PostgreSQL'] },
         { iconImage: LOGOS.Tecnicina, from: 'Oct 2013', to: 'Dec 2017', jobtitle: 'Database Manager', company: 'Tecnicina', highlights: ['Ensured the accuracy and functionality of a commerce database for medical equipment sales.', 'Resolved operational issues related to invoice printing and fiscal registration, enhancing workflow reliability'], tecnologies: ['Factusol', 'Magento', 'Prestashop', 'Odoo', 'Python', 'JavaScript', 'JSON', 'Postman'] },
     ],
