@@ -1,5 +1,5 @@
 import { LOGOS, COMMON_LINKS } from './shared';
-import type { TextContent } from '../../../types';
+import type { TextContent } from '../../types';
 
 export const en: TextContent = {
     labels: {},

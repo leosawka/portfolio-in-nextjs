@@ -1,0 +1,11 @@
+.iconLight {
+  fill: #000;
+  filter: drop-shadow(2px 2px 2px #ccc);
+  transition: all 0.3s ease;
+}
+
+.iconDark {
+  fill: #fff;
+  filter: drop-shadow(2px 2px 2px #000);
+  transition: all 0.3s ease;
+}
