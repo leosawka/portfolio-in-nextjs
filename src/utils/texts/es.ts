@@ -47,7 +47,7 @@ export const es: TextContent = {
       databases: ['MySQL', 'PostgreSQL', 'MongoDB', 'SQLite'],
       devops: ['Docker', 'CI/CD', 'Git', 'Github', 'Azure', 'HTTPS'],
       testing: ['Jest', 'Cypress', 'Pytest', 'Unit testing', 'QA automation'],
-      ai: ['OpenAI', 'Groq', 'LLM integration', 'YOLOv8', 'Pandas', 'Data visualization', 'Basic AI modeling'],
+      ai: ['OpenAI', 'Groq', 'LLM integration', 'n8n', 'YOLOv8', 'Pandas', 'Data visualization', 'Basic AI modeling'],
       tools: ["Wordpress", "Wix", "Duda", 'Odoo', 'Magento', 'Prestashop', 'Figma', 'Miro', 'Powerpoint', 'Google Sheets', 'Excel', 'Word', 'Airtable'],
       softskills: ['Teamwork', 'Troubleshooting', 'Critical thinking', 'Technical documentation', 'Project management', 'INTJ'],
       languagesSpoken: ['English', 'Italian', 'Japanese', 'Polish'],

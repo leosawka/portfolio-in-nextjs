@@ -60,6 +60,7 @@ const techColors: Record<string, string> = {
   'OpenAI':'#16AC86',
   Groq:'#F5553C',
   'LLM integration':'#1F1F1F',
+  n8n: '#E3496D',
   YOLOv8:'#D63BBB',
   Pandas:'#1A0F59',
   'Data visualization': '#6BCEFF',
