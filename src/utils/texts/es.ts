@@ -35,6 +35,10 @@ export const es: TextContent = {
       about: 'Santex es una compañía tecnológica que organiza y respalda XAcademy, un programa de formación gratuita y virtual que busca cerrar la brecha entre las habilidades demandadas en el sector IT y el acceso a esa formación, fomentando la inserción laboral en áreas como programación y testing de software. \n\nLos estudiantes que participan en XAcademy deben completar módulos prácticos con proyectos guiados, y presentar entregables que son evaluados por mentores de la empresa. Una vez aprobados los proyectos y evaluaciones, reciben un certificado avalado por Santex, que valida las competencias adquiridas y puede ser utilizado en procesos de selección laboral.',
       logo: LOGOS.santex,
     },
+    EPAM: {
+        about: 'EPAM es una empresa estadounidense de servicios de ingeniería digital y transformación, que ofrece soluciones de desarrollo de productos de software, plataformas digitales, nube e inteligencia artificial para empresas globales y startups.',
+        logo: LOGOS.EPAM,
+    },
   },
     greeting: '¡Bienvenido a mi portfolio!',
     about: 'Mi nombre es Jairo Leonardo Olivera Sawka, soy desarrollador fullstack ubicado en América latina con experiencia como desarrollador semi-senior en una compaía multinacional ubicada en London, Inglaterra, Reino Unido. Tengo más de 7 años de experiencia diseñando aplicaciones web escalables con Python, Django, JavaScript (React, Node.js) y bases de datos SQL. A lo largo de mi carrera he estado implicado en todo el ciclo de vida de los productos pasando por la arquitectura backend, integraciones de APIs, creación de interfaces frontend y despliegues en contenedores con Docker. También he colaborado en soporte técnico, resolución de bugs en producción y guiado a equipos de forma técnica y proactiva. Recientemente he ampliado mi perfil hacia la inteligencia artificial desarrollando proyectos como un chatbot basado en modelos LLM o un sistema de detección de personas en imagen en tiempo real con YOLOv8. Me entusiasma encontrar soluciones eficientes, comunicarme claramente y aprender cada día con cada nuevo reto. Estaré encantado de unirme a su equipo y aportar mi experiencia, versatilidad y enfoque resultado.',
@@ -125,6 +129,14 @@ export const es: TextContent = {
     viewMore: 'Ver más ▼',
     viewLess: 'Ver menos ▲',
     courses: [
+      {
+          title: 'DevOps Fundamentals',
+          description: 'Este curso representa la tercera etapa de un programa de aprendizaje DevOps de cuatro cursos, que abarca conceptos clave como CI/CD, Jenkins, Docker, fundamentos de la automatización y prácticas modernas de entrega de software.',
+          date: 'Octover 25, 2025',
+          certificateId: 'AAAAB1KI',
+          logo: LOGOS.EPAM,
+          provider: 'EPAM',
+      },
       {
         title: 'Automatización QA',
         description: 'Programa intensivo de XAcademy que enseña testing manual y, al completarlo, permite avanzar a pruebas automatizadas con Cypress y APIs en modalidad online.',

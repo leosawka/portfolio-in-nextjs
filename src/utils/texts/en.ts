@@ -35,6 +35,10 @@ export const en: TextContent = {
             about: 'Santex is a technology company that organizes and supports XAcademy, a free and virtual training program designed to close the gap between the skills demanded in the IT sector and access to such training, fostering job placement in areas like programming and software testing. \n\nStudents participating in XAcademy must complete practical modules with guided projects and submit deliverables evaluated by company mentors. Once projects and assessments are approved, they receive a certificate endorsed by Santex, validating the acquired skills and serving as proof in job application processes.',
             logo: LOGOS.santex,
         },
+        EPAM: {
+            about: 'It is an American digital engineering and transformation services company that offers software product development solutions, digital platforms, cloud and artificial intelligence for global companies and startups.',
+            logo: LOGOS.EPAM,
+        },
     },
     greeting: 'Welcome to my portfolio!',
     about: "I am Jairo Leonardo Olivera Sawka, a fullstack developer based in LATAM with experience as a semi-senior developer at a multinational company based in London, England, United Kingdom. I have over 7 years of professional experience developing scalable Web Applications using Python, Django, Javascript (React.js, Node.js), and SQL databases. In my career I have worked from the full product development lifecycle, including backend architecture, API integration, interfaces, and containerization with Docker, to production support, bug fixes, and technical advice in cross-functional teams, which is even more important in a fast-paced environment. More recently I have been involved in AI development with hands-on projects, including a working LLM powered chatbot, and an object detection system using YOLOv8, using a structured version control system. I think that I can bring a combination of technical depth, communication skills, and ability to adapt to a given scenario on any project, and I strongly enjoy the opportunity to problem-solve in the real-world through clean coding practices, thoughtfully designed architecture, and a strong focus on learning.",
@@ -125,6 +129,14 @@ export const en: TextContent = {
     viewMore: 'Show More ▼',
     viewLess: 'Show Less ▲',
     courses: [
+        {
+            title: 'DevOps Fundamentals',
+            description: 'This course represents the third stage of a four-course DevOps learning journey, covering key concepts such as CI/CD, Jenkins, Docker, automation fundamentals, and modern software delivery practices.',
+            date: 'Octover 25, 2025',
+            certificateId: 'AAAAB1KI',
+            logo: LOGOS.EPAM,
+            provider: 'EPAM',
+        },
         {
             title: 'QA Automation',
             description: 'Intensive XAcademy program teaching manual testing and, upon completion, advancing to automated testing with Cypress and APIs in an online format.',

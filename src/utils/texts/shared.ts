@@ -11,7 +11,8 @@ export const LOGOS = {
   PWC: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/PwC_Company_Logo.svg/1920px-PwC_Company_Logo.svg.png',
   Oliteam: 'icons/OliTeam-filled-background.png',
   Halala: 'icons/halala.png',
-  Tecnicina: 'icons/tecnicina.png'
+  Tecnicina: 'icons/tecnicina.png',
+  EPAM: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Effective_Programming_for_America_logo.svg/1920px-Effective_Programming_for_America_logo.svg.png'
 } as const;
 
 export const COMMON_LINKS = {

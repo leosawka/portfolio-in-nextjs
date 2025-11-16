@@ -66,8 +66,8 @@ export default function Home() {
 
   const pageTitle =
     language === 'es'
-      ? 'Inicio — Jairo L. Olivera'
-      : 'Home — Jairo L. Olivera';
+      ? 'Jairo L. Olivera'
+      : 'Jairo L. Olivera';
 
   const pageDescription =
     language === 'es'
